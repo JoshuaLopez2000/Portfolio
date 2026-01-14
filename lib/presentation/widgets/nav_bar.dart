@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled/l10n/app_localizations.dart';
+import 'package:untitled/main.dart'; // Import to access setLocale
 import '../../theme/app_theme.dart';
 
 class NavBar extends StatelessWidget {
@@ -19,6 +20,7 @@ class NavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDesktop = MediaQuery.of(context).size.width > 800;
     final l10n = AppLocalizations.of(context)!;
+    final currentLocale = Localizations.localeOf(context);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
@@ -42,21 +44,64 @@ class NavBar extends StatelessWidget {
                 _NavLink(title: l10n.navSkills, onTap: onSkillsTap),
                 const SizedBox(width: 32),
                 _NavLink(title: l10n.navContact, onTap: onContactTap),
+                const SizedBox(width: 32),
+                _LanguageSwitcher(currentLocale: currentLocale),
               ],
             )
           else
-            IconButton(
-              icon: const Icon(Icons.menu, color: AppTheme.primary),
-              onPressed: () {
-                // Future: Implement mobile drawer with same callbacks
-                Scaffold.of(context).openEndDrawer();
-              },
-            ),
+             Row(
+               children: [
+                 _LanguageSwitcher(currentLocale: currentLocale),
+                 const SizedBox(width: 16),
+                 IconButton(
+                  icon: const Icon(Icons.menu, color: AppTheme.primary),
+                  onPressed: () {
+                    // Future: Implement mobile drawer with same callbacks
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                ),
+               ],
+             )
         ],
       ),
     );
   }
 }
+
+class _LanguageSwitcher extends StatelessWidget {
+  final Locale currentLocale;
+
+  const _LanguageSwitcher({required this.currentLocale});
+
+  @override
+  Widget build(BuildContext context) {
+    final isEn = currentLocale.languageCode == 'en';
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          final newLocale = isEn ? const Locale('es') : const Locale('en');
+          MiPortfolioApp.setLocale(context, newLocale);
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            border: Border.all(color: AppTheme.primary),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Text(
+            isEn ? 'EN' : 'ES',
+            style: GoogleFonts.jetBrainsMono(
+              color: AppTheme.primary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 class _NavLink extends StatefulWidget {
   final String title;
