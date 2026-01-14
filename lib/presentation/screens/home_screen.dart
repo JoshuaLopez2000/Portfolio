@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled/l10n/app_localizations.dart';
 
 import '../../theme/app_theme.dart';
@@ -39,8 +40,64 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: AppTheme.background,
+      endDrawer: Drawer(
+        backgroundColor: AppTheme.background,
+        child: Column(
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: AppTheme.surface,
+              ),
+              child: Center(
+                child: Text(
+                  '< Joshua />',
+                  style: GoogleFonts.jetBrainsMono(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.primary,
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.work_outline, color: AppTheme.primary),
+              title: Text(
+                l10n.navProjects,
+                style: GoogleFonts.jetBrainsMono(color: AppTheme.textPrimary),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                _scrollToSection(_projectsKey);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.code, color: AppTheme.primary),
+              title: Text(
+                l10n.navSkills,
+                style: GoogleFonts.jetBrainsMono(color: AppTheme.textPrimary),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                _scrollToSection(_skillsKey);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.mail_outline, color: AppTheme.primary),
+              title: Text(
+                l10n.navContact,
+                style: GoogleFonts.jetBrainsMono(color: AppTheme.textPrimary),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                _scrollToSection(_contactKey);
+              },
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
           // Background "Tech" Grid
