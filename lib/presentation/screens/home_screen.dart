@@ -1,13 +1,40 @@
 import 'package:flutter/material.dart';
-
+import 'package:untitled/l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
-import '../widgets/hero_section.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/hero_section.dart';
 import '../widgets/project_card.dart';
 import '../widgets/skills_section.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _projectsKey = GlobalKey();
+  final GlobalKey _skillsKey = GlobalKey();
+  final GlobalKey _contactKey = GlobalKey();
+
+  void _scrollToSection(GlobalKey key) {
+    final context = key.currentContext;
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,23 +42,43 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: AppTheme.background,
       body: Stack(
         children: [
-          // Background "Tech" Grid (Simple placeholder for particle animation)
-          Positioned.fill(child: CustomPaint(painter: GridPainter())),
+          // Background "Tech" Grid
+          Positioned.fill(
+            child: CustomPaint(
+              painter: GridPainter(),
+            ),
+          ),
 
           Column(
             children: [
-              const NavBar(),
+              NavBar(
+                onProjectsTap: () => _scrollToSection(_projectsKey),
+                onSkillsTap: () => _scrollToSection(_skillsKey),
+                onContactTap: () => _scrollToSection(_contactKey),
+              ),
               Expanded(
                 child: SingleChildScrollView(
+                  controller: _scrollController,
                   child: Column(
                     children: [
-                      const HeroSection(),
+                      HeroSection(
+                        onViewProjectsTap: () => _scrollToSection(_projectsKey),
+                      ),
                       const SizedBox(height: 60),
-                      _buildProjectsSection(context),
+                      Container(
+                        key: _projectsKey,
+                        child: _buildProjectsSection(context),
+                      ),
                       const SizedBox(height: 60),
-                      const SkillsSection(),
+                      Container(
+                        key: _skillsKey,
+                        child: const SkillsSection(),
+                      ),
                       const SizedBox(height: 100),
-                      _buildFooter(context),
+                      Container(
+                        key: _contactKey,
+                        child: _buildFooter(context),
+                      ),
                     ],
                   ),
                 ),
@@ -45,6 +92,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildProjectsSection(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final l10n = AppLocalizations.of(context)!;
     // Simple responsive grid logic
     int crossAxisCount = 1;
     if (size.width > 1100) {
@@ -52,6 +100,7 @@ class HomeScreen extends StatelessWidget {
     } else if (size.width > 700) {
       crossAxisCount = 2;
     }
+
     double padding = size.width > 800 ? 100 : 24;
 
     return Padding(
@@ -60,11 +109,11 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Selected Projects',
+            l10n.selectedProjects,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-              color: AppTheme.textPrimary,
-              fontSize: 32,
-            ),
+                  color: AppTheme.textPrimary,
+                  fontSize: 32,
+                ),
           ),
           const SizedBox(height: 40),
           GridView.count(
@@ -74,34 +123,30 @@ class HomeScreen extends StatelessWidget {
             mainAxisSpacing: 24,
             crossAxisSpacing: 24,
             childAspectRatio: 1.3,
-            children: const [
+            children: [
               ProjectCard(
-                title: 'Neural Network Viz',
-                description:
-                    'A 3D visualization tool for neural network architectures using WebGL and Python.',
-                tags: ['Python', 'WebGL', 'Three.js'],
+                title: l10n.projectNeuralTitle,
+                description: l10n.projectNeuralDesc,
+                tags: const ['Python', 'WebGL', 'Three.js'],
                 githubUrl: 'https://github.com',
               ),
               ProjectCard(
-                title: 'Distributed Chat',
-                description:
-                    'Scalable real-time chat application built with Go and gRPC, handling 10k+ concurrent connections.',
-                tags: ['Go', 'gRPC', 'Redis'],
+                title: l10n.projectChatTitle,
+                description: l10n.projectChatDesc,
+                tags: const ['Go', 'gRPC', 'Redis'],
                 githubUrl: 'https://github.com',
                 demoUrl: 'https://example.com',
               ),
               ProjectCard(
-                title: 'Crypto Trading Bot',
-                description:
-                    'Automated trading algorithm interacting with multiple exchanges via WebSocket APIs.',
-                tags: ['Node.js', 'WebSockets', 'MongoDB'],
+                title: l10n.projectBotTitle,
+                description: l10n.projectBotDesc,
+                tags: const ['Node.js', 'WebSockets', 'MongoDB'],
                 githubUrl: 'https://github.com',
               ),
               ProjectCard(
-                title: 'Portfolio V1',
-                description:
-                    'My previous portfolio site built with React and Tailwind CSS.',
-                tags: ['React', 'Tailwind', 'Vercel'],
+                title: l10n.projectPortfolioTitle,
+                description: l10n.projectPortfolioDesc,
+                tags: const ['React', 'Tailwind', 'Vercel'],
                 githubUrl: 'https://github.com',
               ),
             ],
@@ -116,10 +161,10 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       width: double.infinity,
       color: AppTheme.surface,
-      child: const Center(
+      child: Center(
         child: Text(
-          '© 2026 Joshua. Built with Flutter & Coffee.',
-          style: TextStyle(color: AppTheme.textSecondary),
+          AppLocalizations.of(context)!.footerText,
+          style: const TextStyle(color: AppTheme.textSecondary),
         ),
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:untitled/l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
 
 class SkillsSection extends StatelessWidget {
@@ -15,18 +15,18 @@ class SkillsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'Tech Stack',
+            AppLocalizations.of(context)!.techStack,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-              color: AppTheme.primary,
-              fontSize: 32,
-            ),
+                  color: AppTheme.primary,
+                  fontSize: 32,
+                ),
           ),
           const SizedBox(height: 50),
           Wrap(
             spacing: 40,
             runSpacing: 40,
             alignment: WrapAlignment.center,
-            children: [
+            children: const [
               _SkillItem(icon: FontAwesomeIcons.python, label: 'Python'),
               _SkillItem(icon: FontAwesomeIcons.code, label: 'Dart/Flutter'),
               _SkillItem(icon: FontAwesomeIcons.js, label: 'JavaScript'),
@@ -75,7 +75,7 @@ class _SkillItemState extends State<_SkillItem> {
                         color: AppTheme.primary.withValues(alpha: 0.4),
                         blurRadius: 20,
                         spreadRadius: 2,
-                      ),
+                      )
                     ]
                   : [],
             ),

@@ -1,10 +1,12 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-
+import 'package:untitled/l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
 
 class HeroSection extends StatelessWidget {
-  const HeroSection({super.key});
+  final VoidCallback onViewProjectsTap;
+
+  const HeroSection({super.key, required this.onViewProjectsTap});
 
   @override
   Widget build(BuildContext context) {
@@ -36,45 +38,46 @@ class HeroSection extends StatelessWidget {
   }
 
   Widget _buildTextContent(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          '> Hello, I am Joshua_',
-          style: Theme.of(
-            context,
-          ).textTheme.displayMedium?.copyWith(color: AppTheme.primary),
+          l10n.greeting,
+          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                color: AppTheme.primary,
+              ),
         ),
         const SizedBox(height: 20),
         SizedBox(
           height: 50,
           child: DefaultTextStyle(
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-              fontFamily: 'JetBrains Mono',
-              color: AppTheme.textPrimary,
-            ),
+                  fontFamily: 'JetBrains Mono',
+                  color: AppTheme.textPrimary,
+                ),
             child: AnimatedTextKit(
               repeatForever: true,
               animatedTexts: [
-                TypewriterAnimatedText('Backend Developer'),
-                TypewriterAnimatedText('Systems Architect'),
-                TypewriterAnimatedText('Tech Enthusiast'),
+                TypewriterAnimatedText(l10n.roleBackend),
+                TypewriterAnimatedText(l10n.roleSystems),
+                TypewriterAnimatedText(l10n.roleTech),
               ],
             ),
           ),
         ),
         const SizedBox(height: 30),
         Text(
-          'Crafting robust systems and elegant code.\nFocusing on scalability, performance, and clean architecture.',
+          l10n.introText,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            height: 1.5,
-            color: AppTheme.textSecondary,
-          ),
+                height: 1.5,
+                color: AppTheme.textSecondary,
+              ),
         ),
         const SizedBox(height: 40),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: onViewProjectsTap,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppTheme.primary,
             foregroundColor: Colors.black,
@@ -84,7 +87,7 @@ class HeroSection extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          child: const Text('View Projects'),
+          child: Text(l10n.viewProjects),
         ),
       ],
     );

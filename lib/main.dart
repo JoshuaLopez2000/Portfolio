@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'core/app_routes.dart';
+import 'presentation/screens/home_screen.dart';
 import 'l10n/app_localizations.dart';
 
 void main() {
@@ -21,8 +21,7 @@ class MiPortfolioApp extends StatelessWidget {
         colorSchemeSeed: Colors.indigo,
         brightness: Brightness.dark,
       ),
-      initialRoute: AppRoutes.home,
-      routes: AppRoutes.getRoutes(),
+      home: const HomeScreen(),
     );
   }
 }

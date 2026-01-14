@@ -98,35 +98,125 @@ abstract class AppLocalizations {
     Locale('es'),
   ];
 
-  /// No description provided for @welcomeToPortfolio.
+  /// No description provided for @greeting.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to my Portfolio'**
-  String get welcomeToPortfolio;
+  /// **'> Hello, I am Joshua_'**
+  String get greeting;
 
-  /// No description provided for @home.
+  /// No description provided for @roleBackend.
   ///
   /// In en, this message translates to:
-  /// **'Home'**
-  String get home;
+  /// **'Backend Developer'**
+  String get roleBackend;
 
-  /// No description provided for @viewMyProfile.
+  /// No description provided for @roleSystems.
   ///
   /// In en, this message translates to:
-  /// **'View My Profile'**
-  String get viewMyProfile;
+  /// **'Systems Architect'**
+  String get roleSystems;
 
-  /// No description provided for @aboutMe.
+  /// No description provided for @roleTech.
   ///
   /// In en, this message translates to:
-  /// **'About Me'**
-  String get aboutMe;
+  /// **'Tech Enthusiast'**
+  String get roleTech;
 
-  /// No description provided for @myDescription.
+  /// No description provided for @introText.
   ///
   /// In en, this message translates to:
-  /// **'Hola, soy un desarrollador Flutter apasionado por crear experiencias increíbles.'**
-  String get myDescription;
+  /// **'Crafting robust systems and elegant code.\nFocusing on scalability, performance, and clean architecture.'**
+  String get introText;
+
+  /// No description provided for @viewProjects.
+  ///
+  /// In en, this message translates to:
+  /// **'View Projects'**
+  String get viewProjects;
+
+  /// No description provided for @selectedProjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected Projects'**
+  String get selectedProjects;
+
+  /// No description provided for @techStack.
+  ///
+  /// In en, this message translates to:
+  /// **'Tech Stack'**
+  String get techStack;
+
+  /// No description provided for @footerText.
+  ///
+  /// In en, this message translates to:
+  /// **'© 2026 Joshua. Built with Flutter & Coffee.'**
+  String get footerText;
+
+  /// No description provided for @navProjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Projects'**
+  String get navProjects;
+
+  /// No description provided for @navSkills.
+  ///
+  /// In en, this message translates to:
+  /// **'Skills'**
+  String get navSkills;
+
+  /// No description provided for @navContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get navContact;
+
+  /// No description provided for @projectNeuralTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Neural Network Viz'**
+  String get projectNeuralTitle;
+
+  /// No description provided for @projectNeuralDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'A 3D visualization tool for neural network architectures using WebGL and Python.'**
+  String get projectNeuralDesc;
+
+  /// No description provided for @projectChatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Distributed Chat'**
+  String get projectChatTitle;
+
+  /// No description provided for @projectChatDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Scalable real-time chat application built with Go and gRPC, handling 10k+ concurrent connections.'**
+  String get projectChatDesc;
+
+  /// No description provided for @projectBotTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Crypto Trading Bot'**
+  String get projectBotTitle;
+
+  /// No description provided for @projectBotDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Automated trading algorithm interacting with multiple exchanges via WebSocket APIs.'**
+  String get projectBotDesc;
+
+  /// No description provided for @projectPortfolioTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Portfolio V1'**
+  String get projectPortfolioTitle;
+
+  /// No description provided for @projectPortfolioDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'My previous portfolio site built with React and Tailwind CSS.'**
+  String get projectPortfolioDesc;
 }
 
 class _AppLocalizationsDelegate

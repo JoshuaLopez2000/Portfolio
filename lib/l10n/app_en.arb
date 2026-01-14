@@ -1,7 +1,22 @@
 {
-  "welcomeToPortfolio": "Welcome to my Portfolio",
-  "home": "Home",
-  "viewMyProfile": "View My Profile",
-  "aboutMe": "About Me",
-  "myDescription": "Hola, soy un desarrollador Flutter apasionado por crear experiencias increíbles."
+  "greeting": "> Hello, I am Joshua_",
+  "roleBackend": "Backend Developer",
+  "roleSystems": "Systems Architect",
+  "roleTech": "Tech Enthusiast",
+  "introText": "Crafting robust systems and elegant code.\nFocusing on scalability, performance, and clean architecture.",
+  "viewProjects": "View Projects",
+  "selectedProjects": "Selected Projects",
+  "techStack": "Tech Stack",
+  "footerText": "© 2026 Joshua. Built with Flutter & Coffee.",
+  "navProjects": "Projects",
+  "navSkills": "Skills",
+  "navContact": "Contact",
+  "projectNeuralTitle": "Neural Network Viz",
+  "projectNeuralDesc": "A 3D visualization tool for neural network architectures using WebGL and Python.",
+  "projectChatTitle": "Distributed Chat",
+  "projectChatDesc": "Scalable real-time chat application built with Go and gRPC, handling 10k+ concurrent connections.",
+  "projectBotTitle": "Crypto Trading Bot",
+  "projectBotDesc": "Automated trading algorithm interacting with multiple exchanges via WebSocket APIs.",
+  "projectPortfolioTitle": "Portfolio V1",
+  "projectPortfolioDesc": "My previous portfolio site built with React and Tailwind CSS."
 }

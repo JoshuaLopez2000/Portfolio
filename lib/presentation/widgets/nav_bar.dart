@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:untitled/l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
 
 class NavBar extends StatelessWidget {
-  const NavBar({super.key});
+  final VoidCallback onProjectsTap;
+  final VoidCallback onSkillsTap;
+  final VoidCallback onContactTap;
+
+  const NavBar({
+    super.key,
+    required this.onProjectsTap,
+    required this.onSkillsTap,
+    required this.onContactTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     final isDesktop = MediaQuery.of(context).size.width > 800;
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-      color: AppTheme.background.withValues(alpha: 0.9), // Slight transparency
+      color: AppTheme.background.withValues(alpha: 0.9),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -27,18 +37,19 @@ class NavBar extends StatelessWidget {
           if (isDesktop)
             Row(
               children: [
-                _NavLink(title: 'Projects', onTap: () {}),
+                _NavLink(title: l10n.navProjects, onTap: onProjectsTap),
                 const SizedBox(width: 32),
-                _NavLink(title: 'Skills', onTap: () {}),
+                _NavLink(title: l10n.navSkills, onTap: onSkillsTap),
                 const SizedBox(width: 32),
-                _NavLink(title: 'Contact', onTap: () {}),
+                _NavLink(title: l10n.navContact, onTap: onContactTap),
               ],
             )
           else
             IconButton(
               icon: const Icon(Icons.menu, color: AppTheme.primary),
               onPressed: () {
-                // Open drawer or modal
+                // Future: Implement mobile drawer with same callbacks
+                Scaffold.of(context).openEndDrawer();
               },
             ),
         ],

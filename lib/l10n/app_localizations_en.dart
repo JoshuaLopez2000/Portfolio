@@ -9,18 +9,67 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get welcomeToPortfolio => 'Welcome to my Portfolio';
+  String get greeting => '> Hello, I am Joshua_';
 
   @override
-  String get home => 'Home';
+  String get roleBackend => 'Backend Developer';
 
   @override
-  String get viewMyProfile => 'View My Profile';
+  String get roleSystems => 'Systems Architect';
 
   @override
-  String get aboutMe => 'About Me';
+  String get roleTech => 'Tech Enthusiast';
 
   @override
-  String get myDescription =>
-      'Hola, soy un desarrollador Flutter apasionado por crear experiencias increíbles.';
+  String get introText =>
+      'Crafting robust systems and elegant code.\nFocusing on scalability, performance, and clean architecture.';
+
+  @override
+  String get viewProjects => 'View Projects';
+
+  @override
+  String get selectedProjects => 'Selected Projects';
+
+  @override
+  String get techStack => 'Tech Stack';
+
+  @override
+  String get footerText => '© 2026 Joshua. Built with Flutter & Coffee.';
+
+  @override
+  String get navProjects => 'Projects';
+
+  @override
+  String get navSkills => 'Skills';
+
+  @override
+  String get navContact => 'Contact';
+
+  @override
+  String get projectNeuralTitle => 'Neural Network Viz';
+
+  @override
+  String get projectNeuralDesc =>
+      'A 3D visualization tool for neural network architectures using WebGL and Python.';
+
+  @override
+  String get projectChatTitle => 'Distributed Chat';
+
+  @override
+  String get projectChatDesc =>
+      'Scalable real-time chat application built with Go and gRPC, handling 10k+ concurrent connections.';
+
+  @override
+  String get projectBotTitle => 'Crypto Trading Bot';
+
+  @override
+  String get projectBotDesc =>
+      'Automated trading algorithm interacting with multiple exchanges via WebSocket APIs.';
+
+  @override
+  String get projectPortfolioTitle => 'Portfolio V1';
+
+  @override
+  String get projectPortfolioDesc =>
+      'My previous portfolio site built with React and Tailwind CSS.';
 }
