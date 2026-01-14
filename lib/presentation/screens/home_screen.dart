@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/l10n/app_localizations.dart';
+
 import '../../theme/app_theme.dart';
-import '../widgets/nav_bar.dart';
 import '../widgets/hero_section.dart';
+import '../widgets/nav_bar.dart';
 import '../widgets/project_card.dart';
 import '../widgets/skills_section.dart';
 
@@ -43,11 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           // Background "Tech" Grid
-          Positioned.fill(
-            child: CustomPaint(
-              painter: GridPainter(),
-            ),
-          ),
+          Positioned.fill(child: CustomPaint(painter: GridPainter())),
 
           Column(
             children: [
@@ -70,15 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: _buildProjectsSection(context),
                       ),
                       const SizedBox(height: 60),
-                      Container(
-                        key: _skillsKey,
-                        child: const SkillsSection(),
-                      ),
+                      Container(key: _skillsKey, child: const SkillsSection()),
                       const SizedBox(height: 100),
-                      Container(
-                        key: _contactKey,
-                        child: _buildFooter(context),
-                      ),
+                      Container(key: _contactKey, child: _buildFooter(context)),
                     ],
                   ),
                 ),
@@ -111,9 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Text(
             l10n.selectedProjects,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  color: AppTheme.textPrimary,
-                  fontSize: 32,
-                ),
+              color: AppTheme.textPrimary,
+              fontSize: 32,
+            ),
           ),
           const SizedBox(height: 40),
           GridView.count(

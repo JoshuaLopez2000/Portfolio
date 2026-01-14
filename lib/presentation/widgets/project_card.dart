@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../theme/app_theme.dart';
 
@@ -12,6 +13,7 @@ class ProjectCard extends StatefulWidget {
   final List<String> tags;
   final String? githubUrl;
   final String? demoUrl;
+  final String? youtubeUrl;
 
   const ProjectCard({
     super.key,
@@ -20,6 +22,7 @@ class ProjectCard extends StatefulWidget {
     required this.tags,
     this.githubUrl,
     this.demoUrl,
+    this.youtubeUrl,
   });
 
   @override
@@ -34,6 +37,53 @@ class _ProjectCardState extends State<ProjectCard> {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     }
+  }
+
+  void _playVideo(String url) {
+    final videoId = _convertUrlToId(url);
+    if (videoId == null) return;
+
+    final controller = YoutubePlayerController.fromVideoId(
+      videoId: videoId,
+      autoPlay: true,
+      params: const YoutubePlayerParams(
+        showFullscreenButton: true,
+      ),
+    );
+
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(16),
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Stack(
+              children: [
+                YoutubePlayer(
+                  controller: controller,
+                  aspectRatio: 16 / 9,
+                ),
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  String? _convertUrlToId(String url) {
+    return YoutubePlayerController.convertUrlToId(url);
   }
 
   @override
@@ -116,6 +166,16 @@ class _ProjectCardState extends State<ProjectCard> {
                               ? AppTheme.primary
                               : AppTheme.textSecondary,
                           onPressed: () => _launchUrl(widget.demoUrl!),
+                        ),
+                      if (widget.youtubeUrl != null)
+                        IconButton(
+                          icon: const FaIcon(
+                            FontAwesomeIcons.youtube,
+                          ),
+                          color: _isHovered
+                              ? AppTheme.primary
+                              : AppTheme.textSecondary,
+                          onPressed: () => _playVideo(widget.youtubeUrl!),
                         ),
                     ],
                   ),
