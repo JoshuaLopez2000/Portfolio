@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'presentation/screens/home_screen.dart';
+
 import 'l10n/app_localizations.dart';
+import 'presentation/screens/home_screen.dart';
 
 void main() {
   runApp(const MiPortfolioApp());
@@ -10,7 +11,8 @@ class MiPortfolioApp extends StatefulWidget {
   const MiPortfolioApp({super.key});
 
   static void setLocale(BuildContext context, Locale newLocale) {
-    _MiPortfolioAppState? state = context.findAncestorStateOfType<_MiPortfolioAppState>();
+    _MiPortfolioAppState? state = context
+        .findAncestorStateOfType<_MiPortfolioAppState>();
     state?.setLocale(newLocale);
   }
 
@@ -30,7 +32,7 @@ class _MiPortfolioAppState extends State<MiPortfolioApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mi Presentación',
+      title: 'Joshua Lopez Portfolio',
       locale: _locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

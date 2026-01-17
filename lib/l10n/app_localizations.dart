@@ -217,6 +217,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'My previous portfolio site built with React and Tailwind CSS.'**
   String get projectPortfolioDesc;
+
+  /// No description provided for @contactMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a project in mind or just want to say hi?'**
+  String get contactMsg;
 }
 
 class _AppLocalizationsDelegate

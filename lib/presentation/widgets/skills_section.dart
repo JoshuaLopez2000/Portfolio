@@ -17,9 +17,9 @@ class SkillsSection extends StatelessWidget {
           Text(
             AppLocalizations.of(context)!.techStack,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  color: AppTheme.primary,
-                  fontSize: 32,
-                ),
+              color: AppTheme.primary,
+              fontSize: 32,
+            ),
           ),
           const SizedBox(height: 50),
           Wrap(
@@ -75,7 +75,7 @@ class _SkillItemState extends State<_SkillItem> {
                         color: AppTheme.primary.withValues(alpha: 0.4),
                         blurRadius: 20,
                         spreadRadius: 2,
-                      )
+                      ),
                     ]
                   : [],
             ),

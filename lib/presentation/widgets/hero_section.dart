@@ -45,18 +45,18 @@ class HeroSection extends StatelessWidget {
       children: [
         Text(
           l10n.greeting,
-          style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                color: AppTheme.primary,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.displayMedium?.copyWith(color: AppTheme.primary),
         ),
         const SizedBox(height: 20),
         SizedBox(
           height: 50,
           child: DefaultTextStyle(
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                  fontFamily: 'JetBrains Mono',
-                  color: AppTheme.textPrimary,
-                ),
+              fontFamily: 'JetBrains Mono',
+              color: AppTheme.textPrimary,
+            ),
             child: AnimatedTextKit(
               repeatForever: true,
               animatedTexts: [
@@ -71,9 +71,9 @@ class HeroSection extends StatelessWidget {
         Text(
           l10n.introText,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                height: 1.5,
-                color: AppTheme.textSecondary,
-              ),
+            height: 1.5,
+            color: AppTheme.textSecondary,
+          ),
         ),
         const SizedBox(height: 40),
         ElevatedButton(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:untitled/l10n/app_localizations.dart';
 
 import '../../theme/app_theme.dart';
@@ -48,9 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             DrawerHeader(
-              decoration: const BoxDecoration(
-                color: AppTheme.surface,
-              ),
+              decoration: const BoxDecoration(color: AppTheme.surface),
               child: Center(
                 child: Text(
                   '< Joshua />',
@@ -205,15 +204,53 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildFooter(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 24),
       width: double.infinity,
       color: AppTheme.surface,
-      child: Center(
-        child: Text(
-          AppLocalizations.of(context)!.footerText,
-          style: const TextStyle(color: AppTheme.textSecondary),
-        ),
+      child: Column(
+        children: [
+          Text(
+            l10n.navContact,
+            style: GoogleFonts.jetBrainsMono(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: AppTheme.primary,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            l10n.contactMsg,
+            style: const TextStyle(color: AppTheme.textSecondary),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          ElevatedButton.icon(
+            onPressed: () async {
+              final Uri emailLaunchUri = Uri(
+                scheme: 'mailto',
+                path: 'joshua@dev.com',
+                queryParameters: {'subject': 'Hello Joshua!'},
+              );
+              if (await canLaunchUrl(emailLaunchUri)) {
+                await launchUrl(emailLaunchUri);
+              }
+            },
+            icon: const Icon(Icons.email_outlined),
+            label: Text('joshua@dev.com', style: GoogleFonts.jetBrainsMono()),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppTheme.primary,
+              foregroundColor: AppTheme.background,
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+            ),
+          ),
+          const SizedBox(height: 48),
+          Text(
+            l10n.footerText,
+            style: const TextStyle(color: AppTheme.textSecondary, fontSize: 12),
+          ),
+        ],
       ),
     );
   }

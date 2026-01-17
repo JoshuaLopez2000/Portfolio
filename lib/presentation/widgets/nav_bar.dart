@@ -49,19 +49,19 @@ class NavBar extends StatelessWidget {
               ],
             )
           else
-             Row(
-               children: [
-                 _LanguageSwitcher(currentLocale: currentLocale),
-                 const SizedBox(width: 16),
-                 IconButton(
+            Row(
+              children: [
+                _LanguageSwitcher(currentLocale: currentLocale),
+                const SizedBox(width: 16),
+                IconButton(
                   icon: const Icon(Icons.menu, color: AppTheme.primary),
                   onPressed: () {
                     // Future: Implement mobile drawer with same callbacks
                     Scaffold.of(context).openEndDrawer();
                   },
                 ),
-               ],
-             )
+              ],
+            ),
         ],
       ),
     );
@@ -101,7 +101,6 @@ class _LanguageSwitcher extends StatelessWidget {
     );
   }
 }
-
 
 class _NavLink extends StatefulWidget {
   final String title;

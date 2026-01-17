@@ -46,9 +46,7 @@ class _ProjectCardState extends State<ProjectCard> {
     final controller = YoutubePlayerController.fromVideoId(
       videoId: videoId,
       autoPlay: true,
-      params: const YoutubePlayerParams(
-        showFullscreenButton: true,
-      ),
+      params: const YoutubePlayerParams(showFullscreenButton: true),
     );
 
     showDialog(
@@ -62,10 +60,7 @@ class _ProjectCardState extends State<ProjectCard> {
             borderRadius: BorderRadius.circular(16),
             child: Stack(
               children: [
-                YoutubePlayer(
-                  controller: controller,
-                  aspectRatio: 16 / 9,
-                ),
+                YoutubePlayer(controller: controller, aspectRatio: 16 / 9),
                 Positioned(
                   top: 8,
                   right: 8,
@@ -169,9 +164,7 @@ class _ProjectCardState extends State<ProjectCard> {
                         ),
                       if (widget.youtubeUrl != null)
                         IconButton(
-                          icon: const FaIcon(
-                            FontAwesomeIcons.youtube,
-                          ),
+                          icon: const FaIcon(FontAwesomeIcons.youtube),
                           color: _isHovered
                               ? AppTheme.primary
                               : AppTheme.textSecondary,

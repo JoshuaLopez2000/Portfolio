@@ -20,7 +20,7 @@ void main() {
 
     // Verify that the app renders without crashing.
     expect(find.byType(MiPortfolioApp), findsOneWidget);
-    
+
     // Reset the surface size
     addTearDown(tester.view.resetPhysicalSize);
   });

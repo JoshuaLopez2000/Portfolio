@@ -18,5 +18,6 @@
   "projectBotTitle": "Crypto Trading Bot",
   "projectBotDesc": "Automated trading algorithm interacting with multiple exchanges via WebSocket APIs.",
   "projectPortfolioTitle": "Portfolio V1",
-  "projectPortfolioDesc": "My previous portfolio site built with React and Tailwind CSS."
+  "projectPortfolioDesc": "My previous portfolio site built with React and Tailwind CSS.",
+  "contactMsg": "Have a project in mind or just want to say hi?"
 }

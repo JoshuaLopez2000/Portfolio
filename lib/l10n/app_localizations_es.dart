@@ -72,4 +72,8 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get projectPortfolioDesc =>
       'Mi sitio de portafolio anterior construido con React y Tailwind CSS.';
+
+  @override
+  String get contactMsg =>
+      '¿Tienes un proyecto en mente o solo quieres saludar?';
 }
