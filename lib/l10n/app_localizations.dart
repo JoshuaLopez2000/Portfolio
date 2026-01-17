@@ -101,8 +101,8 @@ abstract class AppLocalizations {
   /// No description provided for @greeting.
   ///
   /// In en, this message translates to:
-  /// **'> Hello, I am Joshua_'**
-  String get greeting;
+  /// **'> Hello, I am {name}_'**
+  String greeting(Object name);
 
   /// No description provided for @roleBackend.
   ///
@@ -149,8 +149,8 @@ abstract class AppLocalizations {
   /// No description provided for @footerText.
   ///
   /// In en, this message translates to:
-  /// **'© 2026 Joshua. Built with Flutter & Coffee.'**
-  String get footerText;
+  /// **'© 2026 {name}. Built with Flutter & Coffee.'**
+  String footerText(Object name);
 
   /// No description provided for @navProjects.
   ///

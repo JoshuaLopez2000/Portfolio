@@ -5,8 +5,9 @@ import '../../theme/app_theme.dart';
 
 class HeroSection extends StatelessWidget {
   final VoidCallback onViewProjectsTap;
+  final String name;
 
-  const HeroSection({super.key, required this.onViewProjectsTap});
+  const HeroSection({super.key, required this.onViewProjectsTap, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class HeroSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          l10n.greeting,
+          l10n.greeting(name),
           style: Theme.of(
             context,
           ).textTheme.displayMedium?.copyWith(color: AppTheme.primary),

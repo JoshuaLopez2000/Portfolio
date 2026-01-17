@@ -9,7 +9,9 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get greeting => '> Hola, soy Joshua_';
+  String greeting(Object name) {
+    return '> Hola, soy ${name}_';
+  }
 
   @override
   String get roleBackend => 'Desarrollador Backend';
@@ -34,7 +36,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get techStack => 'Stack Tecnológico';
 
   @override
-  String get footerText => '© 2026 Joshua. Creado con Flutter y Café.';
+  String footerText(Object name) {
+    return '© 2026 $name. Creado con Flutter y Café.';
+  }
 
   @override
   String get navProjects => 'Proyectos';

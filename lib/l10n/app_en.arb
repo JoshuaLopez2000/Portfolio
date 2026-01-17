@@ -1,5 +1,5 @@
 {
-  "greeting": "> Hello, I am Joshua_",
+  "greeting": "> Hello, I am {name}_",
   "roleBackend": "Backend Developer",
   "roleSystems": "Systems Architect",
   "roleTech": "Tech Enthusiast",
@@ -7,7 +7,7 @@
   "viewProjects": "View Projects",
   "selectedProjects": "Selected Projects",
   "techStack": "Tech Stack",
-  "footerText": "© 2026 Joshua. Built with Flutter & Coffee.",
+  "footerText": "© 2026 {name}. Built with Flutter & Coffee.",
   "navProjects": "Projects",
   "navSkills": "Skills",
   "navContact": "Contact",

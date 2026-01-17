@@ -1,13 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:untitled/features/skills/domain/entities/skill.dart';
+import 'package:untitled/injection_container.dart';
 import 'package:untitled/l10n/app_localizations.dart';
+
 import '../../theme/app_theme.dart';
 
-class SkillsSection extends StatelessWidget {
+class SkillsSection extends StatefulWidget {
   const SkillsSection({super.key});
 
   @override
+  State<SkillsSection> createState() => _SkillsSectionState();
+}
+
+class _SkillsSectionState extends State<SkillsSection> {
+  List<Skill> _skills = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSkills();
+  }
+
+  Future<void> _loadSkills() async {
+    final getSkills = sl.getSkills;
+    final skills = await getSkills();
+    if (mounted) {
+      setState(() {
+        _skills = skills;
+        _isLoading = false;
+      });
+    }
+  }
+
+  IconData _getIconForCode(String code) {
+    switch (code) {
+      case 'python':
+        return FontAwesomeIcons.python;
+      case 'code':
+        return FontAwesomeIcons.code;
+      case 'js':
+        return FontAwesomeIcons.js;
+      case 'docker':
+        return FontAwesomeIcons.docker;
+      case 'linux':
+        return FontAwesomeIcons.linux;
+      case 'gitAlt':
+        return FontAwesomeIcons.gitAlt;
+      case 'aws':
+        return FontAwesomeIcons.aws;
+      case 'database':
+        return FontAwesomeIcons.database;
+      default:
+        return FontAwesomeIcons.code;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(color: AppTheme.primary),
+      );
+    }
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 60),
       width: double.infinity,
@@ -26,16 +83,14 @@ class SkillsSection extends StatelessWidget {
             spacing: 40,
             runSpacing: 40,
             alignment: WrapAlignment.center,
-            children: const [
-              _SkillItem(icon: FontAwesomeIcons.python, label: 'Python'),
-              _SkillItem(icon: FontAwesomeIcons.code, label: 'Dart/Flutter'),
-              _SkillItem(icon: FontAwesomeIcons.js, label: 'JavaScript'),
-              _SkillItem(icon: FontAwesomeIcons.docker, label: 'Docker'),
-              _SkillItem(icon: FontAwesomeIcons.linux, label: 'Linux'),
-              _SkillItem(icon: FontAwesomeIcons.gitAlt, label: 'Git'),
-              _SkillItem(icon: FontAwesomeIcons.aws, label: 'AWS'),
-              _SkillItem(icon: FontAwesomeIcons.database, label: 'SQL'),
-            ],
+            children: _skills
+                .map(
+                  (skill) => _SkillItem(
+                    icon: _getIconForCode(skill.iconCode),
+                    label: skill.name,
+                  ),
+                )
+                .toList(),
           ),
         ],
       ),

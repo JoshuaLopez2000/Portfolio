@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:untitled/l10n/app_localizations.dart';
+import 'package:untitled/features/profile/domain/entities/profile.dart';
+import 'package:untitled/features/projects/domain/entities/project.dart';
+import 'package:untitled/injection_container.dart';
 
 import '../../theme/app_theme.dart';
 import '../widgets/hero_section.dart';
@@ -10,7 +13,8 @@ import '../widgets/project_card.dart';
 import '../widgets/skills_section.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final Profile profile;
+  const HomeScreen({super.key, required this.profile});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -21,10 +25,41 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey _projectsKey = GlobalKey();
   final GlobalKey _skillsKey = GlobalKey();
   final GlobalKey _contactKey = GlobalKey();
+  
+  List<Project> _projects = [];
+  bool _isProjectsLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    // I initially load nothing here because I need the context to know the language,
+    // so I delegate that responsibility to didChangeDependencies.
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Here it is safe to access the context to get the locale and load the projects.
+    _loadProjects();
+  }
+
+  Future<void> _loadProjects() async {
+    // I get the current language code to request projects in the correct language.
+    final locale = Localizations.localeOf(context).languageCode;
+    final getProjects = sl.getProjects;
+    final projects = await getProjects(lang: locale);
+    if (mounted) {
+      setState(() {
+        _projects = projects;
+        _isProjectsLoading = false;
+      });
+    }
+  }
 
   void _scrollToSection(GlobalKey key) {
     final context = key.currentContext;
     if (context != null) {
+      // I perform a smooth scroll to the selected section.
       Scrollable.ensureVisible(
         context,
         duration: const Duration(milliseconds: 600),
@@ -52,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: const BoxDecoration(color: AppTheme.surface),
               child: Center(
                 child: Text(
-                  '< Joshua />',
+                  '< ${widget.profile.name} />',
                   style: GoogleFonts.jetBrainsMono(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -105,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             children: [
               NavBar(
+                name: widget.profile.name,
                 onProjectsTap: () => _scrollToSection(_projectsKey),
                 onSkillsTap: () => _scrollToSection(_skillsKey),
                 onContactTap: () => _scrollToSection(_contactKey),
@@ -115,6 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       HeroSection(
+                        name: widget.profile.name,
                         onViewProjectsTap: () => _scrollToSection(_projectsKey),
                       ),
                       const SizedBox(height: 60),
@@ -138,9 +175,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildProjectsSection(BuildContext context) {
+    if (_isProjectsLoading) {
+      return const Center(child: CircularProgressIndicator(color: AppTheme.primary));
+    }
     final size = MediaQuery.of(context).size;
     final l10n = AppLocalizations.of(context)!;
-    // Simple responsive grid logic
+    
+    // I define the logic for a simple responsive grid based on screen width.
     int crossAxisCount = 1;
     if (size.width > 1100) {
       crossAxisCount = 3;
@@ -148,6 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
       crossAxisCount = 2;
     }
 
+    // I dynamically adjust the lateral padding.
     double padding = size.width > 800 ? 100 : 24;
 
     return Padding(
@@ -170,33 +212,13 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisSpacing: 24,
             crossAxisSpacing: 24,
             childAspectRatio: 1.3,
-            children: [
-              ProjectCard(
-                title: l10n.projectNeuralTitle,
-                description: l10n.projectNeuralDesc,
-                tags: const ['Python', 'WebGL', 'Three.js'],
-                githubUrl: 'https://github.com',
-              ),
-              ProjectCard(
-                title: l10n.projectChatTitle,
-                description: l10n.projectChatDesc,
-                tags: const ['Go', 'gRPC', 'Redis'],
-                githubUrl: 'https://github.com',
-                demoUrl: 'https://example.com',
-              ),
-              ProjectCard(
-                title: l10n.projectBotTitle,
-                description: l10n.projectBotDesc,
-                tags: const ['Node.js', 'WebSockets', 'MongoDB'],
-                githubUrl: 'https://github.com',
-              ),
-              ProjectCard(
-                title: l10n.projectPortfolioTitle,
-                description: l10n.projectPortfolioDesc,
-                tags: const ['React', 'Tailwind', 'Vercel'],
-                githubUrl: 'https://github.com',
-              ),
-            ],
+            children: _projects.map((project) => ProjectCard(
+              title: project.title,
+              description: project.description,
+              tags: project.tags,
+              githubUrl: project.githubUrl,
+              demoUrl: project.demoUrl,
+            )).toList(),
           ),
         ],
       ),
@@ -230,15 +252,15 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () async {
               final Uri emailLaunchUri = Uri(
                 scheme: 'mailto',
-                path: 'joshua@dev.com',
-                queryParameters: {'subject': 'Hello Joshua!'},
+                path: widget.profile.email,
+                queryParameters: {'subject': 'Hello ${widget.profile.name}!'},
               );
               if (await canLaunchUrl(emailLaunchUri)) {
                 await launchUrl(emailLaunchUri);
               }
             },
             icon: const Icon(Icons.email_outlined),
-            label: Text('joshua@dev.com', style: GoogleFonts.jetBrainsMono()),
+            label: Text(widget.profile.email, style: GoogleFonts.jetBrainsMono()),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.primary,
               foregroundColor: AppTheme.background,
@@ -247,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 48),
           Text(
-            l10n.footerText,
+            l10n.footerText(widget.profile.name),
             style: const TextStyle(color: AppTheme.textSecondary, fontSize: 12),
           ),
         ],

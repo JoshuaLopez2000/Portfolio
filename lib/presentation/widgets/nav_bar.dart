@@ -8,12 +8,14 @@ class NavBar extends StatelessWidget {
   final VoidCallback onProjectsTap;
   final VoidCallback onSkillsTap;
   final VoidCallback onContactTap;
+  final String name;
 
   const NavBar({
     super.key,
     required this.onProjectsTap,
     required this.onSkillsTap,
     required this.onContactTap,
+    required this.name,
   });
 
   @override
@@ -29,7 +31,7 @@ class NavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '< Joshua />',
+            '< $name />',
             style: GoogleFonts.jetBrainsMono(
               fontSize: 20,
               fontWeight: FontWeight.bold,

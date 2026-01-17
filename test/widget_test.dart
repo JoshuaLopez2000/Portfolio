@@ -8,20 +8,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:untitled/main.dart';
+import 'package:untitled/features/profile/domain/entities/profile.dart';
 
 void main() {
   testWidgets('App renders smoke test', (WidgetTester tester) async {
-    // Set a larger screen size to avoid overflow errors in responsive widgets like ProjectCard
+    // I set a larger screen size to avoid overflow errors in responsive widgets like ProjectCard
     tester.view.physicalSize = const Size(1920, 1080);
     tester.view.devicePixelRatio = 1.0;
 
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MiPortfolioApp());
+    // I build our app and trigger a frame.
+    await tester.pumpWidget(MiPortfolioApp(
+      profile: Profile(name: 'Test', email: 'test@test.com'),
+    ));
 
-    // Verify that the app renders without crashing.
+    // I verify that the app renders without crashing.
     expect(find.byType(MiPortfolioApp), findsOneWidget);
 
-    // Reset the surface size
+    // I reset the surface size
     addTearDown(tester.view.resetPhysicalSize);
   });
 }
