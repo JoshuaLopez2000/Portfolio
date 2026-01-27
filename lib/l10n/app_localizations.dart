@@ -104,23 +104,23 @@ abstract class AppLocalizations {
   /// **'> Hello, I am {name}_'**
   String greeting(Object name);
 
-  /// No description provided for @roleBackend.
+  /// No description provided for @roleMobile.
   ///
   /// In en, this message translates to:
-  /// **'Backend Developer'**
-  String get roleBackend;
+  /// **'Mobile Developer'**
+  String get roleMobile;
 
-  /// No description provided for @roleSystems.
+  /// No description provided for @roleSoftware.
   ///
   /// In en, this message translates to:
-  /// **'Systems Architect'**
-  String get roleSystems;
+  /// **'Software Engineer'**
+  String get roleSoftware;
 
-  /// No description provided for @roleTech.
+  /// No description provided for @roleGames.
   ///
   /// In en, this message translates to:
-  /// **'Tech Enthusiast'**
-  String get roleTech;
+  /// **'Game Developer'**
+  String get roleGames;
 
   /// No description provided for @introText.
   ///

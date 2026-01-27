@@ -14,13 +14,13 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get roleBackend => 'Backend Developer';
+  String get roleMobile => 'Mobile Developer';
 
   @override
-  String get roleSystems => 'Systems Architect';
+  String get roleSoftware => 'Software Engineer';
 
   @override
-  String get roleTech => 'Tech Enthusiast';
+  String get roleGames => 'Game Developer';
 
   @override
   String get introText =>

@@ -26,21 +26,24 @@ class ServiceLocator {
 
   void init() {
     // I configure dependency injection for the Profile Feature.
-    final ProfileLocalDataSource profileLocalDataSource = ProfileLocalDataSourceImpl();
+    final ProfileLocalDataSource profileLocalDataSource =
+        ProfileLocalDataSourceImpl();
     final ProfileRepository profileRepository = ProfileRepositoryImpl(
       localDataSource: profileLocalDataSource,
     );
     getProfile = GetProfile(profileRepository);
 
     // I configure dependency injection for the Projects Feature.
-    final ProjectLocalDataSource projectLocalDataSource = ProjectLocalDataSourceImpl();
+    final ProjectLocalDataSource projectLocalDataSource =
+        ProjectLocalDataSourceImpl();
     final ProjectRepository projectRepository = ProjectRepositoryImpl(
       localDataSource: projectLocalDataSource,
     );
     getProjects = GetProjects(projectRepository);
 
     // I configure dependency injection for the Skills Feature.
-    final SkillLocalDataSource skillLocalDataSource = SkillLocalDataSourceImpl();
+    final SkillLocalDataSource skillLocalDataSource =
+        SkillLocalDataSourceImpl();
     final SkillRepository skillRepository = SkillRepositoryImpl(
       localDataSource: skillLocalDataSource,
     );

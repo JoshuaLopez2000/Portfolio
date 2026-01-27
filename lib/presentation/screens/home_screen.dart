@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey _projectsKey = GlobalKey();
   final GlobalKey _skillsKey = GlobalKey();
   final GlobalKey _contactKey = GlobalKey();
-  
+
   List<Project> _projects = [];
   bool _isProjectsLoading = true;
 
@@ -176,11 +176,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildProjectsSection(BuildContext context) {
     if (_isProjectsLoading) {
-      return const Center(child: CircularProgressIndicator(color: AppTheme.primary));
+      return const Center(
+        child: CircularProgressIndicator(color: AppTheme.primary),
+      );
     }
     final size = MediaQuery.of(context).size;
     final l10n = AppLocalizations.of(context)!;
-    
+
     // I define the logic for a simple responsive grid based on screen width.
     int crossAxisCount = 1;
     if (size.width > 1100) {
@@ -212,13 +214,17 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisSpacing: 24,
             crossAxisSpacing: 24,
             childAspectRatio: 1.3,
-            children: _projects.map((project) => ProjectCard(
-              title: project.title,
-              description: project.description,
-              tags: project.tags,
-              githubUrl: project.githubUrl,
-              demoUrl: project.demoUrl,
-            )).toList(),
+            children: _projects
+                .map(
+                  (project) => ProjectCard(
+                    title: project.title,
+                    description: project.description,
+                    tags: project.tags,
+                    githubUrl: project.githubUrl,
+                    demoUrl: project.demoUrl,
+                  ),
+                )
+                .toList(),
           ),
         ],
       ),
@@ -260,7 +266,10 @@ class _HomeScreenState extends State<HomeScreen> {
               }
             },
             icon: const Icon(Icons.email_outlined),
-            label: Text(widget.profile.email, style: GoogleFonts.jetBrainsMono()),
+            label: Text(
+              widget.profile.email,
+              style: GoogleFonts.jetBrainsMono(),
+            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.primary,
               foregroundColor: AppTheme.background,

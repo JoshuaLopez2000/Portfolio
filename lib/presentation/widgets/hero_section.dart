@@ -7,7 +7,11 @@ class HeroSection extends StatelessWidget {
   final VoidCallback onViewProjectsTap;
   final String name;
 
-  const HeroSection({super.key, required this.onViewProjectsTap, required this.name});
+  const HeroSection({
+    super.key,
+    required this.onViewProjectsTap,
+    required this.name,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +65,9 @@ class HeroSection extends StatelessWidget {
             child: AnimatedTextKit(
               repeatForever: true,
               animatedTexts: [
-                TypewriterAnimatedText(l10n.roleBackend),
-                TypewriterAnimatedText(l10n.roleSystems),
-                TypewriterAnimatedText(l10n.roleTech),
+                TypewriterAnimatedText(l10n.roleMobile),
+                TypewriterAnimatedText(l10n.roleSoftware),
+                TypewriterAnimatedText(l10n.roleGames),
               ],
             ),
           ),

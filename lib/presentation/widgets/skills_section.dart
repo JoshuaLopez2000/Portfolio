@@ -34,27 +34,24 @@ class _SkillsSectionState extends State<SkillsSection> {
     }
   }
 
+  final Map<String, IconData> _iconMap = {
+    'flutter': FontAwesomeIcons.flutter,
+    'unity': FontAwesomeIcons.unity,
+    'cube': FontAwesomeIcons.cube,
+    'gamepad': FontAwesomeIcons.gamepad,
+    'git-alt': FontAwesomeIcons.gitAlt,
+    'mobile-alt': FontAwesomeIcons.mobileAlt,
+    'python': FontAwesomeIcons.python,
+    'code': FontAwesomeIcons.code,
+    'js': FontAwesomeIcons.js,
+    'docker': FontAwesomeIcons.docker,
+    'linux': FontAwesomeIcons.linux,
+    'aws': FontAwesomeIcons.aws,
+    'database': FontAwesomeIcons.database,
+  };
+
   IconData _getIconForCode(String code) {
-    switch (code) {
-      case 'python':
-        return FontAwesomeIcons.python;
-      case 'code':
-        return FontAwesomeIcons.code;
-      case 'js':
-        return FontAwesomeIcons.js;
-      case 'docker':
-        return FontAwesomeIcons.docker;
-      case 'linux':
-        return FontAwesomeIcons.linux;
-      case 'gitAlt':
-        return FontAwesomeIcons.gitAlt;
-      case 'aws':
-        return FontAwesomeIcons.aws;
-      case 'database':
-        return FontAwesomeIcons.database;
-      default:
-        return FontAwesomeIcons.code;
-    }
+    return _iconMap[code] ?? FontAwesomeIcons.code;
   }
 
   @override
