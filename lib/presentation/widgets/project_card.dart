@@ -120,6 +120,8 @@ class _ProjectCardState extends State<ProjectCard> {
                 children: [
                   Text(
                     widget.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: _isHovered
                           ? AppTheme.primary

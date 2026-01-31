@@ -4,6 +4,7 @@ class Project {
   final List<String> tags;
   final String githubUrl;
   final String? demoUrl;
+  final String? youtubeUrl;
 
   const Project({
     required this.title,
@@ -11,5 +12,6 @@ class Project {
     required this.tags,
     required this.githubUrl,
     this.demoUrl,
+    this.youtubeUrl,
   });
 }

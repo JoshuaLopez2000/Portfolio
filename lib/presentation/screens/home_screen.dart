@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:untitled/l10n/app_localizations.dart';
 import 'package:untitled/features/profile/domain/entities/profile.dart';
 import 'package:untitled/features/projects/domain/entities/project.dart';
 import 'package:untitled/injection_container.dart';
+import 'package:untitled/l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../theme/app_theme.dart';
 import '../widgets/hero_section.dart';
@@ -222,6 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     tags: project.tags,
                     githubUrl: project.githubUrl,
                     demoUrl: project.demoUrl,
+                    youtubeUrl: project.youtubeUrl,
                   ),
                 )
                 .toList(),

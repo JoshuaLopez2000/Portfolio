@@ -40,7 +40,7 @@ class _SkillsSectionState extends State<SkillsSection> {
     'cube': FontAwesomeIcons.cube,
     'gamepad': FontAwesomeIcons.gamepad,
     'git-alt': FontAwesomeIcons.gitAlt,
-    'mobile-alt': FontAwesomeIcons.mobileAlt,
+    'mobile-alt': FontAwesomeIcons.mobileScreenButton,
     'python': FontAwesomeIcons.python,
     'code': FontAwesomeIcons.code,
     'js': FontAwesomeIcons.js,
