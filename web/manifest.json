@@ -1,11 +1,11 @@
 {
-    "name": "My Portfolio",
-    "short_name": "Portfolio",
+    "name": "Joshua López — Portfolio",
+    "short_name": "Joshua López",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#121212",
-    "theme_color": "#00FF41",
-    "description": "A new Flutter project.",
+    "background_color": "#0B0F17",
+    "theme_color": "#38BDF8",
+    "description": "Personal portfolio of Joshua López — Software, Mobile (Flutter), and XR/Unity Developer.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
