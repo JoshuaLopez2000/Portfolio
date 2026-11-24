@@ -1,5 +1,10 @@
 import '../../domain/entities/profile.dart';
 
 class ProfileModel extends Profile {
-  ProfileModel({required super.name, required super.email});
+  const ProfileModel({
+    required super.name,
+    required super.email,
+    super.githubUrl,
+    super.linkedinUrl,
+  });
 }
