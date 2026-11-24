@@ -1,66 +1,97 @@
-# Personal Portfolio ✨
+# Personal Portfolio
 
-**Single-page portfolio website built with Flutter**, designed, developed and deployed as a web app on Cloudflare Workers.
+Bilingual (EN/ES) single-page developer portfolio built with Flutter and deployed as a web application on Cloudflare Workers.
 
-> Portafolio personal de una sola página construido con **Flutter** y desplegado como web app. Contenido disponible en **inglés y español**.
+**Live site:** https://portfolio.joshua-lopez-nava-dev.workers.dev/
 
-## 🌐 Live demo / Demo en línea
+---
 
-[https://joshualopez.joshua-lopez-1fd.workers.dev/](https://joshualopez.joshua-lopez-1fd.workers.dev/)
+## Preview
 
-## 📸 Screenshots
+![Portfolio Preview](assets/images/projects/portfolio_preview.png)
 
-> 🚧 Real screenshots coming soon — desktop and mobile versions.
-> (Capturas reales pendientes; se recomienda reemplazar esta nota con GIFs de la versión móvil y de escritorio.)
+## Overview
 
-## ✨ Features
+This repository contains the source code for Joshua López's personal portfolio. It presents featured software, mobile, game development, and XR projects alongside technical skills and contact information in a responsive single-page layout that adapts across desktop, tablet, and mobile viewports.
 
-- **Single-page layout** — smooth scrolling navigation across sections.
-- **Responsive design** — adapts from mobile to desktop.
-- **Localization** — full content in English and Spanish (i18n).
-- **Hero section** — welcoming hero with animated title.
-- **Projects section** — grid of projects with descriptions, tags and links.
-- **Skills section** — skill list with icons.
-- **Contact section** — contact info with a direct email button.
-- **"Tech" aesthetics** — modern design with a grid background and JetBrains Mono font.
+## Features
 
-## 🛠 Technologies used
+- **Responsive single-page layout:** Smooth section navigation across hero, projects, skills, and contact sections with a mobile drawer menu.
+- **Internationalization (EN / ES):** Runtime language switcher powered by `flutter_localizations` and ARB resource files.
+- **Interactive project previews:** Project cards support static screenshots, animated GIFs, multi-item carousels, labeled media placeholders for NDA/non-code showcases, expandable lightbox viewing (`InteractiveViewer`), and embedded YouTube video dialogs.
+- **Clean layered structure:** Separates domain entities, repositories, use cases, local data sources, and presentation widgets by feature (`profile`, `projects`, `skills`).
 
-| Tech | Purpose |
+## Tech Stack
+
+| Component | Technology |
 | --- | --- |
-| [Flutter](https://flutter.dev/) | UI toolkit |
-| Dart | Programming language |
-| `google_fonts` | Custom fonts |
-| `animated_text_kit` | Text animations |
-| `font_awesome_flutter` | Icons |
-| `url_launcher` | Launching URLs / email |
-| `youtube_player_iframe` | Embedding YouTube videos |
-| `flutter_localizations` + `intl` | Internationalization |
+| Framework | Flutter / Dart |
+| Localization | `flutter_localizations`, `intl` |
+| Typography & Icons | `google_fonts`, `font_awesome_flutter` |
+| Media & Links | `youtube_player_iframe`, `url_launcher` |
+| UI Animation | `animated_text_kit` |
+| Hosting | Cloudflare Workers (Web build) |
 
-## 🚀 Getting started
+## Project Structure
 
-```sh
+```text
+.
+├── assets/
+│   ├── icons/                      # App launcher icon assets
+│   └── images/projects/            # Project screenshots and GIF previews
+├── lib/
+│   ├── features/
+│   │   ├── profile/                # Profile entity, repository, use case, local data source
+│   │   ├── projects/               # Project & ProjectMedia entities, data source (EN/ES)
+│   │   └── skills/                 # Skill entity and local data source
+│   ├── l10n/                       # ARB files (app_en.arb, app_es.arb) and generated localizations
+│   ├── presentation/
+│   │   ├── screens/                # HomeScreen layout and responsive sections
+│   │   └── widgets/                # NavBar, HeroSection, ProjectCard, SkillsSection
+│   ├── theme/                      # AppTheme colors and typography
+│   ├── injection_container.dart    # Lightweight dependency wiring
+│   └── main.dart                   # Application entry point and locale state
+├── test/                           # Widget tests
+├── l10n.yaml                       # Localization generation config
+└── pubspec.yaml
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Flutter SDK (Dart SDK `^3.10.7`)
+
+### Run Locally
+
+```bash
 git clone https://github.com/JoshuaLopez2000/Portfolio.git
 cd Portfolio
 flutter pub get
-flutter run
+flutter run -d chrome
 ```
 
-## ⚙️ Customizing content
+### Validation & Production Web Build
 
-All portfolio data is loaded from local data sources, so the site can be repurposed just by editing one file:
+```bash
+flutter analyze
+flutter test
+flutter build web
+```
 
-- **Profile** (name, email) → `getProfile` in `lib/features/profile/data/datasources/profile_local_data_source.dart`
-- **Projects** (titles, descriptions, tags, URLs) → `getProjects` in `lib/features/projects/data/datasources/project_local_data_source.dart`
-- **Skills** → `getSkills` in `lib/features/skills/data/datasources/skill_local_data_source.dart`
+The compiled web bundle is output to `build/web`.
 
-## 🌍 Localization
+## Customizing Content
 
-- `lib/l10n/app_en.arb` — English
-- `lib/l10n/app_es.arb` — Spanish
+Portfolio content is maintained in local data sources and asset folders:
 
-To add a language: create `app_<locale>.arb` in `lib/l10n`, register the locale in `l10n.yaml` and `lib/main.dart`, then run `flutter gen-l10n`.
+- **Profile:** `lib/features/profile/data/datasources/profile_local_data_source.dart`
+- **Projects & Media:** `lib/features/projects/data/datasources/project_local_data_source.dart`
+  - Add screenshots or GIFs under `assets/images/projects/` and reference them via `previewImage` or `previewMedia` (`ProjectMedia`).
+  - Leave `ProjectMedia.assetOrUrl` as `null` to render a labeled placeholder slot until captures are ready.
+- **Skills:** `lib/features/skills/data/datasources/skill_local_data_source.dart`
+- **Localization:** Edit `lib/l10n/app_en.arb` and `lib/l10n/app_es.arb`, then regenerate localization classes with:
 
-## 📄 License
-
-Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
+```bash
+flutter gen-l10n
+```
