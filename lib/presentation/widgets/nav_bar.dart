@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:untitled/features/profile/domain/entities/profile.dart';
 import 'package:untitled/l10n/app_localizations.dart';
 import 'package:untitled/main.dart';

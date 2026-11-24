@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:untitled/features/skills/domain/entities/skill.dart';
 import 'package:untitled/injection_container.dart';
 import 'package:untitled/l10n/app_localizations.dart';
