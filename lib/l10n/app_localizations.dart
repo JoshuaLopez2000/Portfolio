@@ -107,13 +107,13 @@ abstract class AppLocalizations {
   /// No description provided for @heroBadge.
   ///
   /// In en, this message translates to:
-  /// **'UNAM Computer Engineering · Mexico · EN / ES'**
+  /// **'B.S. Computer Engineering (UNAM) · Mexico City · EN / ES'**
   String get heroBadge;
 
   /// No description provided for @heroHeadline.
   ///
   /// In en, this message translates to:
-  /// **'Software, Mobile & XR Developer'**
+  /// **'Software Engineer · Flutter, Go & Unity XR'**
   String get heroHeadline;
 
   /// No description provided for @roleMobile.
@@ -137,7 +137,7 @@ abstract class AppLocalizations {
   /// No description provided for @introText.
   ///
   /// In en, this message translates to:
-  /// **'I build cross-platform Flutter products, interactive 3D simulations, and AR/VR experiences with a focus on clean architecture, visual polish, and reliable delivery.'**
+  /// **'Computer Engineer building production cross-platform Flutter apps, Go/Node.js REST APIs with SQL persistence, and interactive Unity XR simulations — focused on maintainable code and measurable performance gains.'**
   String get introText;
 
   /// No description provided for @viewProjects.
@@ -146,11 +146,29 @@ abstract class AppLocalizations {
   /// **'View Projects'**
   String get viewProjects;
 
+  /// No description provided for @downloadCv.
+  ///
+  /// In en, this message translates to:
+  /// **'Download CV'**
+  String get downloadCv;
+
   /// No description provided for @contactMe.
   ///
   /// In en, this message translates to:
-  /// **'Get in Touch'**
+  /// **'Contact'**
   String get contactMe;
+
+  /// No description provided for @copyEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy email'**
+  String get copyEmail;
+
+  /// No description provided for @emailCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Email copied'**
+  String get emailCopied;
 
   /// No description provided for @heroCardTitle.
   ///
@@ -161,37 +179,37 @@ abstract class AppLocalizations {
   /// No description provided for @heroFocus1Title.
   ///
   /// In en, this message translates to:
-  /// **'Mobile & Web Products'**
+  /// **'Production Flutter & Mobile'**
   String get heroFocus1Title;
 
   /// No description provided for @heroFocus1Subtitle.
   ///
   /// In en, this message translates to:
-  /// **'Flutter, Dart, responsive UI & clean architecture'**
+  /// **'Android, iOS & Web · ~20% faster load times · Play Store & App Store'**
   String get heroFocus1Subtitle;
 
   /// No description provided for @heroFocus2Title.
   ///
   /// In en, this message translates to:
-  /// **'Interactive 3D, VR & AR'**
+  /// **'Backend APIs & SQL'**
   String get heroFocus2Title;
 
   /// No description provided for @heroFocus2Subtitle.
   ///
   /// In en, this message translates to:
-  /// **'Unity, C#, Vuforia, standalone VR & shaders'**
+  /// **'Go, Node.js, Python, JWT, PostgreSQL · up to 40% faster processing'**
   String get heroFocus2Subtitle;
 
   /// No description provided for @heroFocus3Title.
   ///
   /// In en, this message translates to:
-  /// **'Backend & Delivery'**
+  /// **'Unity 6, VR & AR'**
   String get heroFocus3Title;
 
   /// No description provided for @heroFocus3Subtitle.
   ///
   /// In en, this message translates to:
-  /// **'REST APIs, SQL, Docker, Linux & cloud deploys'**
+  /// **'Meta Quest, OpenXR, Vuforia, shaders & testable C# architecture'**
   String get heroFocus3Subtitle;
 
   /// No description provided for @projectsEyebrow.
@@ -209,13 +227,37 @@ abstract class AppLocalizations {
   /// No description provided for @projectsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Production collaborations, XR prototypes, and cross-platform apps with live previews.'**
+  /// **'Full-stack Flutter + Go engineering, VR training systems, and interactive mobile apps. Open any card for the full case study.'**
   String get projectsSubtitle;
+
+  /// No description provided for @experienceEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'02 · TRACK RECORD'**
+  String get experienceEyebrow;
+
+  /// No description provided for @experienceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Experience & Education'**
+  String get experienceTitle;
+
+  /// No description provided for @experienceSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Production mobile apps, VR simulation engineering, QA discipline, and UNAM Computer Engineering foundation.'**
+  String get experienceSubtitle;
+
+  /// No description provided for @educationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Education & Languages'**
+  String get educationTitle;
 
   /// No description provided for @skillsEyebrow.
   ///
   /// In en, this message translates to:
-  /// **'02 · CAPABILITIES'**
+  /// **'03 · CAPABILITIES'**
   String get skillsEyebrow;
 
   /// No description provided for @techStack.
@@ -227,7 +269,7 @@ abstract class AppLocalizations {
   /// No description provided for @skillsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Core technologies across mobile engineering, interactive 3D/XR, and infrastructure.'**
+  /// **'Technologies backed by shipped mobile apps, backend APIs, and XR simulations.'**
   String get skillsSubtitle;
 
   /// No description provided for @skillCategoryMobile.
@@ -239,25 +281,25 @@ abstract class AppLocalizations {
   /// No description provided for @skillCategoryInteractive.
   ///
   /// In en, this message translates to:
-  /// **'Games & XR (AR / VR)'**
+  /// **'Unity & XR (VR / AR)'**
   String get skillCategoryInteractive;
 
   /// No description provided for @skillCategoryBackend.
   ///
   /// In en, this message translates to:
-  /// **'Backend, Cloud & Tools'**
+  /// **'Backend, Data & Delivery'**
   String get skillCategoryBackend;
 
   /// No description provided for @contactEyebrow.
   ///
   /// In en, this message translates to:
-  /// **'03 · CONTACT'**
+  /// **'04 · CONTACT'**
   String get contactEyebrow;
 
   /// No description provided for @contactMsg.
   ///
   /// In en, this message translates to:
-  /// **'Open to software, Flutter, and Unity/XR opportunities. Let\'s talk about your next project.'**
+  /// **'Open to Flutter, Full-Stack (Go/Node/SQL), and Unity/XR roles. Reach out directly or copy my email in one click.'**
   String get contactMsg;
 
   /// No description provided for @footerText.
@@ -271,6 +313,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Projects'**
   String get navProjects;
+
+  /// No description provided for @navExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Experience'**
+  String get navExperience;
 
   /// No description provided for @navSkills.
   ///
@@ -301,6 +349,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Video'**
   String get actionVideo;
+
+  /// No description provided for @actionCaseStudy.
+  ///
+  /// In en, this message translates to:
+  /// **'Case study'**
+  String get actionCaseStudy;
+
+  /// No description provided for @caseStudyProblem.
+  ///
+  /// In en, this message translates to:
+  /// **'Context & Challenge'**
+  String get caseStudyProblem;
+
+  /// No description provided for @caseStudySolution.
+  ///
+  /// In en, this message translates to:
+  /// **'Architecture & Solution'**
+  String get caseStudySolution;
+
+  /// No description provided for @caseStudyHighlights.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical Highlights'**
+  String get caseStudyHighlights;
+
+  /// No description provided for @caseStudyImpact.
+  ///
+  /// In en, this message translates to:
+  /// **'Outcome & Impact'**
+  String get caseStudyImpact;
+
+  /// No description provided for @caseStudyRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get caseStudyRole;
 }
 
 class _AppLocalizationsDelegate

@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:untitled/features/profile/domain/entities/profile.dart';
 import 'package:untitled/features/projects/domain/entities/project.dart';
 import 'package:untitled/injection_container.dart';
@@ -7,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../theme/app_icons.dart';
 import '../../theme/app_theme.dart';
+import '../widgets/experience_section.dart';
 import '../widgets/hero_section.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/project_card.dart';
@@ -23,11 +27,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _projectsKey = GlobalKey();
+  final GlobalKey _experienceKey = GlobalKey();
   final GlobalKey _skillsKey = GlobalKey();
   final GlobalKey _contactKey = GlobalKey();
 
   List<Project> _projects = [];
   bool _isProjectsLoading = true;
+  bool _footerEmailCopied = false;
+  Timer? _copiedTimer;
 
   @override
   void didChangeDependencies() {
@@ -76,8 +83,41 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<void> _openCv(BuildContext context) async {
+    final locale = Localizations.localeOf(context).languageCode;
+    final cvPath = widget.profile.cvPathForLocale(locale);
+    if (cvPath == null) return;
+    final uri = Uri.base.resolve(cvPath);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  Future<void> _copyEmail() async {
+    final l10n = AppLocalizations.of(context)!;
+    final messenger = ScaffoldMessenger.of(context);
+    await Clipboard.setData(ClipboardData(text: widget.profile.email));
+    if (!mounted) return;
+    _copiedTimer?.cancel();
+    setState(() => _footerEmailCopied = true);
+    _copiedTimer = Timer(const Duration(seconds: 2), () {
+      if (mounted) setState(() => _footerEmailCopied = false);
+    });
+    messenger
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text('${l10n.emailCopied}: ${widget.profile.email}'),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: AppTheme.surfaceElevated,
+          duration: const Duration(seconds: 2),
+        ),
+      );
+  }
+
   @override
   void dispose() {
+    _copiedTimer?.cancel();
     _scrollController.dispose();
     super.dispose();
   }
@@ -130,6 +170,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 leading: const Icon(
+                  Icons.timeline_rounded,
+                  color: AppTheme.primary,
+                ),
+                title: Text(l10n.navExperience),
+                onTap: () {
+                  Navigator.pop(context);
+                  _scrollToSection(_experienceKey);
+                },
+              ),
+              ListTile(
+                leading: const Icon(
                   Icons.layers_outlined,
                   color: AppTheme.primary,
                 ),
@@ -152,6 +203,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const Spacer(),
               const Divider(color: AppTheme.border, height: 1),
+              ListTile(
+                leading: const Icon(
+                  Icons.download_rounded,
+                  size: 18,
+                  color: AppTheme.primary,
+                ),
+                title: Text(l10n.downloadCv),
+                onTap: () {
+                  Navigator.pop(context);
+                  _openCv(context);
+                },
+              ),
               if (widget.profile.githubUrl != null)
                 ListTile(
                   leading: const AppIcon(
@@ -191,6 +254,7 @@ class _HomeScreenState extends State<HomeScreen> {
               NavBar(
                 profile: widget.profile,
                 onProjectsTap: () => _scrollToSection(_projectsKey),
+                onExperienceTap: () => _scrollToSection(_experienceKey),
                 onSkillsTap: () => _scrollToSection(_skillsKey),
                 onContactTap: () => _scrollToSection(_contactKey),
               ),
@@ -204,14 +268,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         onViewProjectsTap: () => _scrollToSection(_projectsKey),
                         onContactTap: () => _scrollToSection(_contactKey),
                       ),
-                      const SizedBox(height: 28),
+                      const SizedBox(height: 24),
                       Container(
                         key: _projectsKey,
                         child: _buildProjectsSection(context),
                       ),
-                      const SizedBox(height: 72),
+                      const SizedBox(height: 76),
+                      Container(
+                        key: _experienceKey,
+                        child: ExperienceSection(profile: widget.profile),
+                      ),
+                      const SizedBox(height: 68),
                       Container(key: _skillsKey, child: const SkillsSection()),
-                      const SizedBox(height: 88),
+                      const SizedBox(height: 84),
                       Container(key: _contactKey, child: _buildFooter(context)),
                     ],
                   ),
@@ -281,7 +350,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisCount: crossAxisCount,
                   mainAxisSpacing: 24,
                   crossAxisSpacing: 24,
-                  mainAxisExtent: 550,
+                  mainAxisExtent: 555,
                 ),
                 itemCount: _projects.length,
                 itemBuilder: (context, index) {
@@ -295,6 +364,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     youtubeUrl: project.youtubeUrl,
                     previewImage: project.previewImage,
                     previewMedia: project.previewMedia,
+                    caseStudy: project.caseStudy,
                   );
                 },
               ),
@@ -344,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 12),
                 ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 540),
+                  constraints: const BoxConstraints(maxWidth: 560),
                   child: Text(
                     l10n.contactMsg,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -368,7 +438,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         foregroundColor: AppTheme.background,
                         elevation: 0,
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
+                          horizontal: 22,
                           vertical: 16,
                         ),
                         shape: RoundedRectangleBorder(
@@ -376,6 +446,54 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         textStyle: Theme.of(context).textTheme.labelLarge
                             ?.copyWith(fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: _copyEmail,
+                      icon: Icon(
+                        _footerEmailCopied
+                            ? Icons.check_rounded
+                            : Icons.copy_rounded,
+                        size: 16,
+                        color: _footerEmailCopied
+                            ? AppTheme.primary
+                            : AppTheme.textPrimary,
+                      ),
+                      label: Text(
+                        _footerEmailCopied ? l10n.emailCopied : l10n.copyEmail,
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: _footerEmailCopied
+                            ? AppTheme.primary
+                            : AppTheme.textPrimary,
+                        side: BorderSide(
+                          color: _footerEmailCopied
+                              ? AppTheme.primary
+                              : AppTheme.border,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 16,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: () => _openCv(context),
+                      icon: const Icon(Icons.download_rounded, size: 16),
+                      label: Text(l10n.downloadCv),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppTheme.textPrimary,
+                        side: const BorderSide(color: AppTheme.border),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 16,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                     ),
                     if (widget.profile.githubUrl != null)
@@ -438,7 +556,6 @@ class _HomeScreenState extends State<HomeScreen> {
 class StudioBackgroundPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    // Subtle top ambient light (Modern Dark Studio)
     final topGlow = Paint()
       ..shader = RadialGradient(
         center: const Alignment(0.0, -1.0),
@@ -452,7 +569,6 @@ class StudioBackgroundPainter extends CustomPainter {
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), topGlow);
 
-    // Subtle hairline dot/grid structure
     final gridPaint = Paint()
       ..color = AppTheme.border.withValues(alpha: 0.22)
       ..strokeWidth = 1;

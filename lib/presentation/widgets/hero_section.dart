@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:untitled/features/profile/domain/entities/profile.dart';
 import 'package:untitled/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -6,7 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app_icons.dart';
 import '../../theme/app_theme.dart';
 
-class HeroSection extends StatelessWidget {
+class HeroSection extends StatefulWidget {
   final VoidCallback onViewProjectsTap;
   final VoidCallback onContactTap;
   final Profile profile;
@@ -18,6 +21,20 @@ class HeroSection extends StatelessWidget {
     required this.profile,
   });
 
+  @override
+  State<HeroSection> createState() => _HeroSectionState();
+}
+
+class _HeroSectionState extends State<HeroSection> {
+  bool _emailCopied = false;
+  Timer? _copiedTimer;
+
+  @override
+  void dispose() {
+    _copiedTimer?.cancel();
+    super.dispose();
+  }
+
   Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -25,15 +42,36 @@ class HeroSection extends StatelessWidget {
     }
   }
 
-  Future<void> _launchEmail() async {
-    final uri = Uri(
-      scheme: 'mailto',
-      path: profile.email,
-      queryParameters: {'subject': 'Hello ${profile.name}!'},
-    );
+  Future<void> _openCv(BuildContext context) async {
+    final locale = Localizations.localeOf(context).languageCode;
+    final cvPath = widget.profile.cvPathForLocale(locale);
+    if (cvPath == null) return;
+    final uri = Uri.base.resolve(cvPath);
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
+  }
+
+  Future<void> _copyEmail() async {
+    final l10n = AppLocalizations.of(context)!;
+    final messenger = ScaffoldMessenger.of(context);
+    await Clipboard.setData(ClipboardData(text: widget.profile.email));
+    if (!mounted) return;
+    _copiedTimer?.cancel();
+    setState(() => _emailCopied = true);
+    _copiedTimer = Timer(const Duration(seconds: 2), () {
+      if (mounted) setState(() => _emailCopied = false);
+    });
+    messenger
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text('${l10n.emailCopied}: ${widget.profile.email}'),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: AppTheme.surfaceElevated,
+          duration: const Duration(seconds: 2),
+        ),
+      );
   }
 
   @override
@@ -47,7 +85,7 @@ class HeroSection extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: isDesktop ? 48 : 20,
-            vertical: isDesktop ? 72 : 44,
+            vertical: isDesktop ? 68 : 44,
           ),
           child: isDesktop
               ? Row(
@@ -73,6 +111,8 @@ class HeroSection extends StatelessWidget {
 
   Widget _buildTextContent(BuildContext context, bool isDesktop) {
     final l10n = AppLocalizations.of(context)!;
+    final profile = widget.profile;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -125,7 +165,7 @@ class HeroSection extends StatelessWidget {
           child: Text(
             l10n.heroHeadline,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontSize: isDesktop ? 26 : 21,
+              fontSize: isDesktop ? 25 : 20,
               fontWeight: FontWeight.w600,
               color: Colors.white,
             ),
@@ -138,18 +178,18 @@ class HeroSection extends StatelessWidget {
             l10n.introText,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               color: AppTheme.textSecondary,
-              fontSize: 16,
+              fontSize: 15.5,
               height: 1.65,
             ),
           ),
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 28),
         Wrap(
           spacing: 12,
           runSpacing: 12,
           children: [
             ElevatedButton.icon(
-              onPressed: onViewProjectsTap,
+              onPressed: widget.onViewProjectsTap,
               icon: const Icon(Icons.arrow_downward_rounded, size: 18),
               label: Text(l10n.viewProjects),
               style: ElevatedButton.styleFrom(
@@ -157,19 +197,42 @@ class HeroSection extends StatelessWidget {
                 foregroundColor: AppTheme.background,
                 elevation: 0,
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
+                  horizontal: 22,
                   vertical: 16,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
+                textStyle: Theme.of(
+                  context,
+                ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
               ),
             ),
             OutlinedButton.icon(
-              onPressed: onContactTap,
+              onPressed: () => _openCv(context),
+              icon: const Icon(Icons.download_rounded, size: 18),
+              label: Text(l10n.downloadCv),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppTheme.textPrimary,
+                side: BorderSide(
+                  color: AppTheme.primary.withValues(alpha: 0.55),
+                  width: 1.2,
+                ),
+                backgroundColor: AppTheme.primary.withValues(alpha: 0.08),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                textStyle: Theme.of(
+                  context,
+                ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
+              ),
+            ),
+            OutlinedButton.icon(
+              onPressed: widget.onContactTap,
               icon: const Icon(Icons.mail_outline_rounded, size: 18),
               label: Text(l10n.contactMe),
               style: OutlinedButton.styleFrom(
@@ -177,20 +240,20 @@ class HeroSection extends StatelessWidget {
                 side: const BorderSide(color: AppTheme.border, width: 1.2),
                 backgroundColor: AppTheme.surface.withValues(alpha: 0.6),
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 22,
+                  horizontal: 20,
                   vertical: 16,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                textStyle: Theme.of(
+                  context,
+                ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 22),
         Wrap(
           spacing: 10,
           runSpacing: 10,
@@ -208,9 +271,13 @@ class HeroSection extends StatelessWidget {
                 onTap: () => _launchUrl(profile.linkedinUrl!),
               ),
             _SocialPill(
-              icon: const Icon(Icons.mail_outline_rounded),
-              label: profile.email,
-              onTap: _launchEmail,
+              icon: Icon(
+                _emailCopied ? Icons.check_rounded : Icons.copy_rounded,
+              ),
+              label: _emailCopied ? l10n.emailCopied : profile.email,
+              highlight: _emailCopied,
+              tooltip: l10n.copyEmail,
+              onTap: _copyEmail,
             ),
           ],
         ),
@@ -251,14 +318,17 @@ class HeroSection extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppTheme.surfaceElevated,
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(color: AppTheme.border),
                 ),
                 child: Text(
-                  'Flutter · Unity · XR',
+                  'Flutter · Go · Unity XR',
                   style: AppTheme.mono(
                     fontSize: 11,
                     color: AppTheme.textSecondary,
@@ -280,7 +350,7 @@ class HeroSection extends StatelessWidget {
           ),
           _FocusRow(
             index: '02',
-            icon: Icons.view_in_ar_rounded,
+            icon: Icons.dns_outlined,
             title: l10n.heroFocus2Title,
             subtitle: l10n.heroFocus2Subtitle,
           ),
@@ -290,7 +360,7 @@ class HeroSection extends StatelessWidget {
           ),
           _FocusRow(
             index: '03',
-            icon: Icons.cloud_done_outlined,
+            icon: Icons.view_in_ar_rounded,
             title: l10n.heroFocus3Title,
             subtitle: l10n.heroFocus3Subtitle,
           ),
@@ -375,11 +445,15 @@ class _SocialPill extends StatefulWidget {
   final Widget icon;
   final String label;
   final VoidCallback onTap;
+  final bool highlight;
+  final String? tooltip;
 
   const _SocialPill({
     required this.icon,
     required this.label,
     required this.onTap,
+    this.highlight = false,
+    this.tooltip,
   });
 
   @override
@@ -391,7 +465,8 @@ class _SocialPillState extends State<_SocialPill> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
+    final active = _isHovered || widget.highlight;
+    final pill = MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       cursor: SystemMouseCursors.click,
@@ -401,12 +476,14 @@ class _SocialPillState extends State<_SocialPill> {
           duration: const Duration(milliseconds: 180),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: _isHovered
+            color: widget.highlight
+                ? AppTheme.primary.withValues(alpha: 0.14)
+                : _isHovered
                 ? AppTheme.surfaceElevated
                 : AppTheme.surface.withValues(alpha: 0.7),
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: _isHovered
+              color: active
                   ? AppTheme.primary.withValues(alpha: 0.7)
                   : AppTheme.border,
             ),
@@ -417,7 +494,7 @@ class _SocialPillState extends State<_SocialPill> {
               IconTheme(
                 data: IconThemeData(
                   size: 14,
-                  color: _isHovered ? AppTheme.primary : AppTheme.textSecondary,
+                  color: active ? AppTheme.primary : AppTheme.textSecondary,
                 ),
                 child: widget.icon,
               ),
@@ -426,9 +503,7 @@ class _SocialPillState extends State<_SocialPill> {
                 widget.label,
                 style: AppTheme.mono(
                   fontSize: 12,
-                  color: _isHovered
-                      ? AppTheme.textPrimary
-                      : AppTheme.textSecondary,
+                  color: active ? AppTheme.textPrimary : AppTheme.textSecondary,
                 ),
               ),
             ],
@@ -436,5 +511,10 @@ class _SocialPillState extends State<_SocialPill> {
         ),
       ),
     );
+
+    if (widget.tooltip != null) {
+      return Tooltip(message: widget.tooltip!, child: pill);
+    }
+    return pill;
   }
 }

@@ -289,11 +289,14 @@ class _SkillChipState extends State<_SkillChip> {
               color: _isHovered ? AppTheme.primary : AppTheme.textSecondary,
             ),
             const SizedBox(width: 8),
-            Text(
-              widget.label,
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: AppTheme.textPrimary,
-                fontWeight: FontWeight.w500,
+            Flexible(
+              child: Text(
+                widget.label,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: AppTheme.textPrimary,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ],

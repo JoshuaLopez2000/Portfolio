@@ -14,10 +14,10 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get heroBadge => 'Ing. en Computación UNAM · México · ES / EN';
+  String get heroBadge => 'Ing. en Computación (UNAM) · CDMX, México · ES / EN';
 
   @override
-  String get heroHeadline => 'Desarrollador de Software, Móvil y XR';
+  String get heroHeadline => 'Ingeniero de Software · Flutter, Go y Unity XR';
 
   @override
   String get roleMobile => 'Desarrollador Móvil';
@@ -30,36 +30,46 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get introText =>
-      'Creo productos multiplataforma en Flutter, simuladores interactivos 3D y experiencias AR/VR con enfoque en arquitectura limpia, rendimiento y calidad de producto.';
+      'Ingeniero en Computación enfocado en aplicaciones Flutter en producción (Android, iOS y Web), APIs REST en Go/Node.js con SQL y simuladores interactivos en Unity XR, con mejoras medibles en rendimiento y entrega punta a punta.';
 
   @override
   String get viewProjects => 'Ver Proyectos';
 
   @override
-  String get contactMe => 'Contactar';
+  String get downloadCv => 'Descargar CV';
+
+  @override
+  String get contactMe => 'Contacto';
+
+  @override
+  String get copyEmail => 'Copiar correo';
+
+  @override
+  String get emailCopied => 'Correo copiado';
 
   @override
   String get heroCardTitle => 'En resumen';
 
   @override
-  String get heroFocus1Title => 'Productos Móviles y Web';
+  String get heroFocus1Title => 'Flutter y Móvil en Producción';
 
   @override
   String get heroFocus1Subtitle =>
-      'Flutter, Dart, UI responsiva y arquitectura limpia';
+      'Android, iOS y Web · ~20% menos carga · Play Store y App Store';
 
   @override
-  String get heroFocus2Title => '3D Interactivo, VR y AR';
+  String get heroFocus2Title => 'Backend, APIs y SQL';
 
   @override
-  String get heroFocus2Subtitle => 'Unity, C#, Vuforia, VR autónomo y shaders';
+  String get heroFocus2Subtitle =>
+      'Go, Node.js, Python, JWT, PostgreSQL · hasta 40% en procesos';
 
   @override
-  String get heroFocus3Title => 'Backend y Despliegue';
+  String get heroFocus3Title => 'Unity 6, VR y AR';
 
   @override
   String get heroFocus3Subtitle =>
-      'APIs REST, SQL, Docker, Linux y despliegues cloud';
+      'Meta Quest, OpenXR, Vuforia, shaders y arquitectura C# testeable';
 
   @override
   String get projectsEyebrow => '01 · PROYECTOS DESTACADOS';
@@ -69,33 +79,46 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get projectsSubtitle =>
-      'Colaboraciones profesionales, prototipos XR y aplicaciones multiplataforma con vista previa.';
+      'Ingeniería full-stack en Flutter + Go, simuladores VR y apps interactivas. Abre cualquier tarjeta para ver el caso de estudio completo.';
 
   @override
-  String get skillsEyebrow => '02 · CAPACIDADES';
+  String get experienceEyebrow => '02 · TRAYECTORIA';
+
+  @override
+  String get experienceTitle => 'Experiencia y Educación';
+
+  @override
+  String get experienceSubtitle =>
+      'Aplicaciones móviles en producción, simulación VR, QA multiplataforma y formación en Ingeniería en Computación (UNAM).';
+
+  @override
+  String get educationTitle => 'Educación e Idiomas';
+
+  @override
+  String get skillsEyebrow => '03 · CAPACIDADES';
 
   @override
   String get techStack => 'Stack Tecnológico';
 
   @override
   String get skillsSubtitle =>
-      'Tecnologías principales en desarrollo móvil, 3D/XR interactivo e infraestructura.';
+      'Tecnologías respaldadas por aplicaciones en producción, APIs backend y simuladores XR.';
 
   @override
   String get skillCategoryMobile => 'Móvil y Web';
 
   @override
-  String get skillCategoryInteractive => 'Videojuegos y XR (AR / VR)';
+  String get skillCategoryInteractive => 'Unity y XR (VR / AR)';
 
   @override
-  String get skillCategoryBackend => 'Backend, Cloud y Herramientas';
+  String get skillCategoryBackend => 'Backend, Datos y Entrega';
 
   @override
-  String get contactEyebrow => '03 · CONTACTO';
+  String get contactEyebrow => '04 · CONTACTO';
 
   @override
   String get contactMsg =>
-      'Disponible para oportunidades en software, Flutter y Unity/XR. Hablemos sobre tu próximo proyecto.';
+      'Disponible para roles en Flutter, Full-Stack (Go/Node/SQL) y Unity/XR. Escríbeme directamente o copia mi correo en un clic.';
 
   @override
   String footerText(Object name) {
@@ -104,6 +127,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get navProjects => 'Proyectos';
+
+  @override
+  String get navExperience => 'Experiencia';
 
   @override
   String get navSkills => 'Habilidades';
@@ -119,4 +145,22 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get actionVideo => 'Video';
+
+  @override
+  String get actionCaseStudy => 'Caso de estudio';
+
+  @override
+  String get caseStudyProblem => 'Contexto y Reto';
+
+  @override
+  String get caseStudySolution => 'Arquitectura y Solución';
+
+  @override
+  String get caseStudyHighlights => 'Aspectos Técnicos Clave';
+
+  @override
+  String get caseStudyImpact => 'Resultado e Impacto';
+
+  @override
+  String get caseStudyRole => 'Rol';
 }

@@ -18,6 +18,7 @@ class ProjectCard extends StatefulWidget {
   final String? youtubeUrl;
   final String? previewImage;
   final List<ProjectMedia> previewMedia;
+  final ProjectCaseStudy? caseStudy;
 
   const ProjectCard({
     super.key,
@@ -29,6 +30,7 @@ class ProjectCard extends StatefulWidget {
     this.youtubeUrl,
     this.previewImage,
     this.previewMedia = const [],
+    this.caseStudy,
   });
 
   @override
@@ -241,6 +243,280 @@ class _ProjectCardState extends State<ProjectCard> {
 
   String? _convertUrlToId(String url) {
     return YoutubePlayerController.convertUrlToId(url);
+  }
+
+  void _openCaseStudy() {
+    final cs = widget.caseStudy;
+    if (cs == null) return;
+    final l10n = AppLocalizations.of(context)!;
+
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(20),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 780, maxHeight: 760),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppTheme.surface,
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: AppTheme.border, width: 1.2),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(24, 18, 12, 16),
+                    decoration: const BoxDecoration(
+                      color: AppTheme.background,
+                      border: Border(
+                        bottom: BorderSide(color: AppTheme.border),
+                      ),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 6,
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 9,
+                                      vertical: 3,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.primary.withValues(
+                                        alpha: 0.14,
+                                      ),
+                                      borderRadius: BorderRadius.circular(6),
+                                      border: Border.all(
+                                        color: AppTheme.primary.withValues(
+                                          alpha: 0.45,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      cs.category,
+                                      style: AppTheme.mono(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppTheme.primary,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    cs.period,
+                                    style: AppTheme.mono(
+                                      fontSize: 11,
+                                      color: AppTheme.textMuted,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                widget.title,
+                                style: Theme.of(context).textTheme.titleLarge
+                                    ?.copyWith(
+                                      color: AppTheme.textPrimary,
+                                      fontSize: 22,
+                                    ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                '${l10n.caseStudyRole}: ${cs.role}',
+                                style: Theme.of(context).textTheme.bodyMedium
+                                    ?.copyWith(
+                                      color: AppTheme.secondary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.close_rounded,
+                            color: AppTheme.textSecondary,
+                          ),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _CaseStudyBlock(
+                            icon: Icons.flag_outlined,
+                            title: l10n.caseStudyProblem,
+                            body: cs.problem,
+                          ),
+                          const SizedBox(height: 18),
+                          _CaseStudyBlock(
+                            icon: Icons.architecture_rounded,
+                            title: l10n.caseStudySolution,
+                            body: cs.solution,
+                          ),
+                          const SizedBox(height: 18),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.check_circle_outline_rounded,
+                                size: 17,
+                                color: AppTheme.primary,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                l10n.caseStudyHighlights,
+                                style: Theme.of(context).textTheme.titleSmall
+                                    ?.copyWith(
+                                      color: AppTheme.textPrimary,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          for (final item in cs.highlights)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 7),
+                                    child: Container(
+                                      width: 5,
+                                      height: 5,
+                                      decoration: const BoxDecoration(
+                                        color: AppTheme.primary,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Text(
+                                      item,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                            color: AppTheme.textSecondary,
+                                            height: 1.55,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          const SizedBox(height: 16),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: AppTheme.primary.withValues(alpha: 0.08),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: AppTheme.primary.withValues(alpha: 0.35),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  l10n.caseStudyImpact.toUpperCase(),
+                                  style: AppTheme.mono(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.primary,
+                                    letterSpacing: 1.1,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  cs.impact,
+                                  style: Theme.of(context).textTheme.bodyMedium
+                                      ?.copyWith(
+                                        color: AppTheme.textPrimary,
+                                        height: 1.55,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 18),
+                          Wrap(
+                            spacing: 6,
+                            runSpacing: 6,
+                            children: widget.tags
+                                .map((tag) => _buildTag(tag))
+                                .toList(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 14,
+                    ),
+                    decoration: const BoxDecoration(
+                      color: AppTheme.background,
+                      border: Border(top: BorderSide(color: AppTheme.border)),
+                    ),
+                    child: Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      alignment: WrapAlignment.end,
+                      children: [
+                        if (widget.githubUrl != null)
+                          _CardActionButton(
+                            icon: const AppIcon(AppIcons.github),
+                            label: l10n.actionCode,
+                            onTap: () => _launchUrl(widget.githubUrl!),
+                          ),
+                        if (widget.demoUrl != null)
+                          _CardActionButton(
+                            icon: const AppIcon(AppIcons.externalLink),
+                            label: l10n.actionDemo,
+                            highlight: true,
+                            onTap: () => _launchUrl(widget.demoUrl!),
+                          ),
+                        if (widget.youtubeUrl != null)
+                          _CardActionButton(
+                            icon: const AppIcon(AppIcons.youtube),
+                            label: l10n.actionVideo,
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              _playVideo(widget.youtubeUrl!);
+                            },
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildPreviewImage(String source, {BoxFit fit = BoxFit.cover}) {
@@ -670,6 +946,13 @@ class _ProjectCardState extends State<ProjectCard> {
                         spacing: 8,
                         runSpacing: 8,
                         children: [
+                          if (widget.caseStudy != null)
+                            _CardActionButton(
+                              icon: const Icon(Icons.article_outlined),
+                              label: l10n.actionCaseStudy,
+                              highlight: true,
+                              onTap: _openCaseStudy,
+                            ),
                           if (widget.githubUrl != null)
                             _CardActionButton(
                               icon: const AppIcon(AppIcons.github),
@@ -680,7 +963,7 @@ class _ProjectCardState extends State<ProjectCard> {
                             _CardActionButton(
                               icon: const AppIcon(AppIcons.externalLink),
                               label: l10n.actionDemo,
-                              highlight: true,
+                              highlight: widget.caseStudy == null,
                               onTap: () => _launchUrl(widget.demoUrl!),
                             ),
                           if (widget.youtubeUrl != null)
@@ -813,6 +1096,48 @@ class _MediaNavButton extends StatelessWidget {
           child: Icon(icon, size: 18, color: AppTheme.textPrimary),
         ),
       ),
+    );
+  }
+}
+
+class _CaseStudyBlock extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String body;
+
+  const _CaseStudyBlock({
+    required this.icon,
+    required this.title,
+    required this.body,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(icon, size: 17, color: AppTheme.primary),
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: AppTheme.textPrimary,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Text(
+          body,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: AppTheme.textSecondary,
+            height: 1.6,
+          ),
+        ),
+      ],
     );
   }
 }

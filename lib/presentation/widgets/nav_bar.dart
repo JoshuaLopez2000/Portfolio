@@ -11,6 +11,7 @@ import '../../theme/app_theme.dart';
 
 class NavBar extends StatelessWidget {
   final VoidCallback onProjectsTap;
+  final VoidCallback onExperienceTap;
   final VoidCallback onSkillsTap;
   final VoidCallback onContactTap;
   final Profile profile;
@@ -18,6 +19,7 @@ class NavBar extends StatelessWidget {
   const NavBar({
     super.key,
     required this.onProjectsTap,
+    required this.onExperienceTap,
     required this.onSkillsTap,
     required this.onContactTap,
     required this.profile,
@@ -40,7 +42,7 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final isDesktop = width > 820;
+    final isDesktop = width > 860;
     final l10n = AppLocalizations.of(context)!;
     final currentLocale = Localizations.localeOf(context);
 
@@ -109,20 +111,25 @@ class NavBar extends StatelessWidget {
                             title: l10n.navProjects,
                             onTap: onProjectsTap,
                           ),
-                          const SizedBox(width: 28),
+                          const SizedBox(width: 24),
+                          _NavLink(
+                            title: l10n.navExperience,
+                            onTap: onExperienceTap,
+                          ),
+                          const SizedBox(width: 24),
                           _NavLink(title: l10n.navSkills, onTap: onSkillsTap),
-                          const SizedBox(width: 28),
+                          const SizedBox(width: 24),
                           _NavLink(
                             title: l10n.navContact,
                             onTap: onContactTap,
                           ),
-                          const SizedBox(width: 24),
+                          const SizedBox(width: 20),
                           Container(
                             width: 1,
                             height: 20,
                             color: AppTheme.border,
                           ),
-                          const SizedBox(width: 16),
+                          const SizedBox(width: 14),
                           if (profile.githubUrl != null)
                             _NavIconLink(
                               icon: const AppIcon(AppIcons.github),
@@ -138,7 +145,7 @@ class NavBar extends StatelessWidget {
                                   _launchExternal(profile.linkedinUrl!),
                             ),
                           ],
-                          const SizedBox(width: 16),
+                          const SizedBox(width: 14),
                           _LanguageSwitcher(currentLocale: currentLocale),
                         ],
                       )
