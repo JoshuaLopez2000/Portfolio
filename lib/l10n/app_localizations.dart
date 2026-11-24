@@ -101,8 +101,20 @@ abstract class AppLocalizations {
   /// No description provided for @greeting.
   ///
   /// In en, this message translates to:
-  /// **'> Hello, I am {name}_'**
+  /// **'{name}'**
   String greeting(Object name);
+
+  /// No description provided for @heroBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'UNAM Computer Engineering · Mexico · EN / ES'**
+  String get heroBadge;
+
+  /// No description provided for @heroHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Software, Mobile & XR Developer'**
+  String get heroHeadline;
 
   /// No description provided for @roleMobile.
   ///
@@ -125,7 +137,7 @@ abstract class AppLocalizations {
   /// No description provided for @introText.
   ///
   /// In en, this message translates to:
-  /// **'Crafting robust systems and elegant code.\nFocusing on scalability, performance, and clean architecture.'**
+  /// **'I build cross-platform Flutter products, interactive 3D simulations, and AR/VR experiences with a focus on clean architecture, visual polish, and reliable delivery.'**
   String get introText;
 
   /// No description provided for @viewProjects.
@@ -134,11 +146,77 @@ abstract class AppLocalizations {
   /// **'View Projects'**
   String get viewProjects;
 
+  /// No description provided for @contactMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Get in Touch'**
+  String get contactMe;
+
+  /// No description provided for @heroCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'At a glance'**
+  String get heroCardTitle;
+
+  /// No description provided for @heroFocus1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile & Web Products'**
+  String get heroFocus1Title;
+
+  /// No description provided for @heroFocus1Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Flutter, Dart, responsive UI & clean architecture'**
+  String get heroFocus1Subtitle;
+
+  /// No description provided for @heroFocus2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Interactive 3D, VR & AR'**
+  String get heroFocus2Title;
+
+  /// No description provided for @heroFocus2Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unity, C#, Vuforia, standalone VR & shaders'**
+  String get heroFocus2Subtitle;
+
+  /// No description provided for @heroFocus3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend & Delivery'**
+  String get heroFocus3Title;
+
+  /// No description provided for @heroFocus3Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'REST APIs, SQL, Docker, Linux & cloud deploys'**
+  String get heroFocus3Subtitle;
+
+  /// No description provided for @projectsEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'01 · SELECTED WORK'**
+  String get projectsEyebrow;
+
   /// No description provided for @selectedProjects.
   ///
   /// In en, this message translates to:
   /// **'Selected Projects'**
   String get selectedProjects;
+
+  /// No description provided for @projectsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Production collaborations, XR prototypes, and cross-platform apps with live previews.'**
+  String get projectsSubtitle;
+
+  /// No description provided for @skillsEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'02 · CAPABILITIES'**
+  String get skillsEyebrow;
 
   /// No description provided for @techStack.
   ///
@@ -146,10 +224,46 @@ abstract class AppLocalizations {
   /// **'Tech Stack'**
   String get techStack;
 
+  /// No description provided for @skillsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Core technologies across mobile engineering, interactive 3D/XR, and infrastructure.'**
+  String get skillsSubtitle;
+
+  /// No description provided for @skillCategoryMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile & Web'**
+  String get skillCategoryMobile;
+
+  /// No description provided for @skillCategoryInteractive.
+  ///
+  /// In en, this message translates to:
+  /// **'Games & XR (AR / VR)'**
+  String get skillCategoryInteractive;
+
+  /// No description provided for @skillCategoryBackend.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend, Cloud & Tools'**
+  String get skillCategoryBackend;
+
+  /// No description provided for @contactEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'03 · CONTACT'**
+  String get contactEyebrow;
+
+  /// No description provided for @contactMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Open to software, Flutter, and Unity/XR opportunities. Let\'s talk about your next project.'**
+  String get contactMsg;
+
   /// No description provided for @footerText.
   ///
   /// In en, this message translates to:
-  /// **'© 2026 {name}. Built with Flutter & Coffee.'**
+  /// **'© 2026 {name}. Built with Flutter.'**
   String footerText(Object name);
 
   /// No description provided for @navProjects.
@@ -170,59 +284,23 @@ abstract class AppLocalizations {
   /// **'Contact'**
   String get navContact;
 
-  /// No description provided for @projectNeuralTitle.
+  /// No description provided for @actionCode.
   ///
   /// In en, this message translates to:
-  /// **'Neural Network Viz'**
-  String get projectNeuralTitle;
+  /// **'Code'**
+  String get actionCode;
 
-  /// No description provided for @projectNeuralDesc.
+  /// No description provided for @actionDemo.
   ///
   /// In en, this message translates to:
-  /// **'A 3D visualization tool for neural network architectures using WebGL and Python.'**
-  String get projectNeuralDesc;
+  /// **'Live'**
+  String get actionDemo;
 
-  /// No description provided for @projectChatTitle.
+  /// No description provided for @actionVideo.
   ///
   /// In en, this message translates to:
-  /// **'Distributed Chat'**
-  String get projectChatTitle;
-
-  /// No description provided for @projectChatDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Scalable real-time chat application built with Go and gRPC, handling 10k+ concurrent connections.'**
-  String get projectChatDesc;
-
-  /// No description provided for @projectBotTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Crypto Trading Bot'**
-  String get projectBotTitle;
-
-  /// No description provided for @projectBotDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Automated trading algorithm interacting with multiple exchanges via WebSocket APIs.'**
-  String get projectBotDesc;
-
-  /// No description provided for @projectPortfolioTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Portfolio V1'**
-  String get projectPortfolioTitle;
-
-  /// No description provided for @projectPortfolioDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'My previous portfolio site built with React and Tailwind CSS.'**
-  String get projectPortfolioDesc;
-
-  /// No description provided for @contactMsg.
-  ///
-  /// In en, this message translates to:
-  /// **'Have a project in mind or just want to say hi?'**
-  String get contactMsg;
+  /// **'Video'**
+  String get actionVideo;
 }
 
 class _AppLocalizationsDelegate

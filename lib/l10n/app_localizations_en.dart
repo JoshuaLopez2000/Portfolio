@@ -10,8 +10,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String greeting(Object name) {
-    return '> Hello, I am ${name}_';
+    return '$name';
   }
+
+  @override
+  String get heroBadge => 'UNAM Computer Engineering · Mexico · EN / ES';
+
+  @override
+  String get heroHeadline => 'Software, Mobile & XR Developer';
 
   @override
   String get roleMobile => 'Mobile Developer';
@@ -24,20 +30,77 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get introText =>
-      'Crafting robust systems and elegant code.\nFocusing on scalability, performance, and clean architecture.';
+      'I build cross-platform Flutter products, interactive 3D simulations, and AR/VR experiences with a focus on clean architecture, visual polish, and reliable delivery.';
 
   @override
   String get viewProjects => 'View Projects';
 
   @override
+  String get contactMe => 'Get in Touch';
+
+  @override
+  String get heroCardTitle => 'At a glance';
+
+  @override
+  String get heroFocus1Title => 'Mobile & Web Products';
+
+  @override
+  String get heroFocus1Subtitle =>
+      'Flutter, Dart, responsive UI & clean architecture';
+
+  @override
+  String get heroFocus2Title => 'Interactive 3D, VR & AR';
+
+  @override
+  String get heroFocus2Subtitle =>
+      'Unity, C#, Vuforia, standalone VR & shaders';
+
+  @override
+  String get heroFocus3Title => 'Backend & Delivery';
+
+  @override
+  String get heroFocus3Subtitle =>
+      'REST APIs, SQL, Docker, Linux & cloud deploys';
+
+  @override
+  String get projectsEyebrow => '01 · SELECTED WORK';
+
+  @override
   String get selectedProjects => 'Selected Projects';
+
+  @override
+  String get projectsSubtitle =>
+      'Production collaborations, XR prototypes, and cross-platform apps with live previews.';
+
+  @override
+  String get skillsEyebrow => '02 · CAPABILITIES';
 
   @override
   String get techStack => 'Tech Stack';
 
   @override
+  String get skillsSubtitle =>
+      'Core technologies across mobile engineering, interactive 3D/XR, and infrastructure.';
+
+  @override
+  String get skillCategoryMobile => 'Mobile & Web';
+
+  @override
+  String get skillCategoryInteractive => 'Games & XR (AR / VR)';
+
+  @override
+  String get skillCategoryBackend => 'Backend, Cloud & Tools';
+
+  @override
+  String get contactEyebrow => '03 · CONTACT';
+
+  @override
+  String get contactMsg =>
+      'Open to software, Flutter, and Unity/XR opportunities. Let\'s talk about your next project.';
+
+  @override
   String footerText(Object name) {
-    return '© 2026 $name. Built with Flutter & Coffee.';
+    return '© 2026 $name. Built with Flutter.';
   }
 
   @override
@@ -50,33 +113,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navContact => 'Contact';
 
   @override
-  String get projectNeuralTitle => 'Neural Network Viz';
+  String get actionCode => 'Code';
 
   @override
-  String get projectNeuralDesc =>
-      'A 3D visualization tool for neural network architectures using WebGL and Python.';
+  String get actionDemo => 'Live';
 
   @override
-  String get projectChatTitle => 'Distributed Chat';
-
-  @override
-  String get projectChatDesc =>
-      'Scalable real-time chat application built with Go and gRPC, handling 10k+ concurrent connections.';
-
-  @override
-  String get projectBotTitle => 'Crypto Trading Bot';
-
-  @override
-  String get projectBotDesc =>
-      'Automated trading algorithm interacting with multiple exchanges via WebSocket APIs.';
-
-  @override
-  String get projectPortfolioTitle => 'Portfolio V1';
-
-  @override
-  String get projectPortfolioDesc =>
-      'My previous portfolio site built with React and Tailwind CSS.';
-
-  @override
-  String get contactMsg => 'Have a project in mind or just want to say hi?';
+  String get actionVideo => 'Video';
 }
