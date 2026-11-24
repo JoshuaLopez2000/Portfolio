@@ -22,8 +22,8 @@ class SkillLocalDataSourceImpl implements SkillLocalDataSource {
         category: SkillCategory.mobile,
       ),
       SkillModel(
-        name: 'JavaScript',
-        iconCode: 'js',
+        name: 'Kotlin',
+        iconCode: 'code',
         category: SkillCategory.mobile,
       ),
       SkillModel(
