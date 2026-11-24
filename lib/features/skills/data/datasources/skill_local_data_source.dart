@@ -10,13 +10,14 @@ class SkillLocalDataSourceImpl implements SkillLocalDataSource {
   Future<List<SkillModel>> getSkills() async {
     await Future.delayed(const Duration(milliseconds: 50));
     return const [
+      // Mobile, Web & XR
       SkillModel(
         name: 'Flutter / Dart',
         iconCode: 'flutter',
         category: SkillCategory.mobile,
       ),
       SkillModel(
-        name: 'Mobile Architecture',
+        name: 'Android & iOS',
         iconCode: 'mobile-alt',
         category: SkillCategory.mobile,
       ),
@@ -31,14 +32,25 @@ class SkillLocalDataSourceImpl implements SkillLocalDataSource {
         category: SkillCategory.interactive,
       ),
       SkillModel(
-        name: 'Augmented Reality',
-        iconCode: 'cube',
+        name: 'OpenXR / Meta Quest',
+        iconCode: 'gamepad',
         category: SkillCategory.interactive,
       ),
       SkillModel(
-        name: 'Game Development',
-        iconCode: 'gamepad',
+        name: 'Vuforia (AR)',
+        iconCode: 'cube',
         category: SkillCategory.interactive,
+      ),
+      // Backend, Data & Delivery
+      SkillModel(
+        name: 'Go',
+        iconCode: 'code',
+        category: SkillCategory.backendTools,
+      ),
+      SkillModel(
+        name: 'Node.js',
+        iconCode: 'js',
+        category: SkillCategory.backendTools,
       ),
       SkillModel(
         name: 'Python',
@@ -46,23 +58,13 @@ class SkillLocalDataSourceImpl implements SkillLocalDataSource {
         category: SkillCategory.backendTools,
       ),
       SkillModel(
-        name: 'C / C++',
+        name: 'REST APIs / JWT',
         iconCode: 'code',
         category: SkillCategory.backendTools,
       ),
       SkillModel(
-        name: 'SQL Databases',
+        name: 'PostgreSQL / MySQL',
         iconCode: 'database',
-        category: SkillCategory.backendTools,
-      ),
-      SkillModel(
-        name: 'Linux Systems',
-        iconCode: 'linux',
-        category: SkillCategory.backendTools,
-      ),
-      SkillModel(
-        name: 'Git / DevOps',
-        iconCode: 'git-alt',
         category: SkillCategory.backendTools,
       ),
       SkillModel(
@@ -71,8 +73,18 @@ class SkillLocalDataSourceImpl implements SkillLocalDataSource {
         category: SkillCategory.backendTools,
       ),
       SkillModel(
-        name: 'AWS',
-        iconCode: 'aws',
+        name: 'Git / CI/CD',
+        iconCode: 'git-alt',
+        category: SkillCategory.backendTools,
+      ),
+      SkillModel(
+        name: 'Play Store & App Store',
+        iconCode: 'mobile-alt',
+        category: SkillCategory.backendTools,
+      ),
+      SkillModel(
+        name: 'QA & Testing',
+        iconCode: 'linux',
         category: SkillCategory.backendTools,
       ),
     ];

@@ -10,5 +10,6 @@ class ProjectModel extends Project {
     super.youtubeUrl,
     super.previewImage,
     super.previewMedia,
+    super.caseStudy,
   });
 }

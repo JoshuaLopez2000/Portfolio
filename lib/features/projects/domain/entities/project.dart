@@ -13,7 +13,28 @@ class ProjectMedia {
 
   bool get isPlaceholder => assetOrUrl == null || assetOrUrl!.isEmpty;
   bool get isGif =>
-      assetOrUrl != null && assetOrUrl!.toLowerCase().split('?').first.endsWith('.gif');
+      assetOrUrl != null &&
+      assetOrUrl!.toLowerCase().split('?').first.endsWith('.gif');
+}
+
+class ProjectCaseStudy {
+  final String category;
+  final String role;
+  final String period;
+  final String problem;
+  final String solution;
+  final List<String> highlights;
+  final String impact;
+
+  const ProjectCaseStudy({
+    required this.category,
+    required this.role,
+    required this.period,
+    required this.problem,
+    required this.solution,
+    required this.highlights,
+    required this.impact,
+  });
 }
 
 class Project {
@@ -25,6 +46,7 @@ class Project {
   final String? youtubeUrl;
   final String? previewImage;
   final List<ProjectMedia> previewMedia;
+  final ProjectCaseStudy? caseStudy;
 
   const Project({
     required this.title,
@@ -35,5 +57,6 @@ class Project {
     this.youtubeUrl,
     this.previewImage,
     this.previewMedia = const [],
+    this.caseStudy,
   });
 }
