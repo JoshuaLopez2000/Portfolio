@@ -1,3 +1,7 @@
+import 'features/experience/data/datasources/experience_local_data_source.dart';
+import 'features/experience/data/repositories/experience_repository_impl.dart';
+import 'features/experience/domain/repositories/experience_repository.dart';
+import 'features/experience/domain/usecases/get_experience.dart';
 import 'features/profile/data/datasources/profile_local_data_source.dart';
 import 'features/profile/data/repositories/profile_repository_impl.dart';
 import 'features/profile/domain/repositories/profile_repository.dart';
@@ -23,9 +27,9 @@ class ServiceLocator {
   late GetProfile getProfile;
   late GetProjects getProjects;
   late GetSkills getSkills;
+  late GetExperience getExperience;
 
   void init() {
-    // I configure dependency injection for the Profile Feature.
     final ProfileLocalDataSource profileLocalDataSource =
         ProfileLocalDataSourceImpl();
     final ProfileRepository profileRepository = ProfileRepositoryImpl(
@@ -33,7 +37,6 @@ class ServiceLocator {
     );
     getProfile = GetProfile(profileRepository);
 
-    // I configure dependency injection for the Projects Feature.
     final ProjectLocalDataSource projectLocalDataSource =
         ProjectLocalDataSourceImpl();
     final ProjectRepository projectRepository = ProjectRepositoryImpl(
@@ -41,13 +44,19 @@ class ServiceLocator {
     );
     getProjects = GetProjects(projectRepository);
 
-    // I configure dependency injection for the Skills Feature.
     final SkillLocalDataSource skillLocalDataSource =
         SkillLocalDataSourceImpl();
     final SkillRepository skillRepository = SkillRepositoryImpl(
       localDataSource: skillLocalDataSource,
     );
     getSkills = GetSkills(skillRepository);
+
+    final ExperienceLocalDataSource experienceLocalDataSource =
+        ExperienceLocalDataSourceImpl();
+    final ExperienceRepository experienceRepository = ExperienceRepositoryImpl(
+      localDataSource: experienceLocalDataSource,
+    );
+    getExperience = GetExperience(experienceRepository);
   }
 }
 
