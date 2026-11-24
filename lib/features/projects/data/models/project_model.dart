@@ -8,5 +8,7 @@ class ProjectModel extends Project {
     required super.githubUrl,
     super.demoUrl,
     super.youtubeUrl,
+    super.previewImage,
+    super.previewMedia,
   });
 }
