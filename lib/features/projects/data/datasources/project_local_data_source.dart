@@ -69,21 +69,42 @@ class ProjectLocalDataSourceImpl implements ProjectLocalDataSource {
             'VMS',
           ],
           githubUrl: 'https://github.com/JoshuaLopez2000/Forklift-VR-Simulator',
+          previewImage: 'assets/images/projects/forklift_vr_preview.png',
           previewMedia: [
             ProjectMedia(
-              // TODO: Añadir assetOrUrl (ej. 'assets/images/projects/forklift_cabin.gif') cuando esté disponible
-              label: 'Controles en cabina VR',
-              hint: 'Captura / GIF próximamente',
+              assetOrUrl: 'assets/images/projects/forklift_vr_preview.png',
+              label: 'Menú principal en VR',
             ),
             ProjectMedia(
-              // TODO: Añadir assetOrUrl (ej. 'assets/images/projects/forklift_driving.gif') cuando esté disponible
+              assetOrUrl: 'assets/images/projects/forklift_main_menu.gif',
+              label: 'Selección de módulo en VR',
+            ),
+            ProjectMedia(
+              assetOrUrl:
+                  'assets/images/projects/forklift_exterior_inspection.gif',
+              label: 'Inspección exterior previa',
+            ),
+            ProjectMedia(
+              assetOrUrl:
+                  'assets/images/projects/forklift_interior_inspection.gif',
+              label: 'Inspección de controles en cabina',
+            ),
+            ProjectMedia(
+              assetOrUrl:
+                  'assets/images/projects/forklift_inspection_evaluation.png',
+              label: 'Evaluación de inspección',
+            ),
+            ProjectMedia(
+              assetOrUrl: 'assets/images/projects/forklift_driving.gif',
               label: 'Conducción y estacionamiento',
-              hint: 'Captura / GIF próximamente',
             ),
             ProjectMedia(
-              // TODO: Añadir assetOrUrl (ej. 'assets/images/projects/forklift_pallets.gif') cuando esté disponible
+              assetOrUrl: 'assets/images/projects/forklift_load_handling.gif',
               label: 'Manejo y colocación de carga',
-              hint: 'Captura / GIF próximamente',
+            ),
+            ProjectMedia(
+              assetOrUrl: 'assets/images/projects/forklift_session_results.png',
+              label: 'Resultados y métricas de sesión',
             ),
           ],
           caseStudy: ProjectCaseStudy(
@@ -283,21 +304,42 @@ class ProjectLocalDataSourceImpl implements ProjectLocalDataSource {
             'Interactive Virtual Reality training simulator (Unity 6, Meta Quest, OpenXR) built at Virtual Mind. Features scored inspection, driving, parking, and load-handling modules plus calibratable USB wheel/pedal support.',
         tags: ['Unity 6', 'C#', 'Meta Quest', 'OpenXR', 'USB Rig', 'VMS'],
         githubUrl: 'https://github.com/JoshuaLopez2000/Forklift-VR-Simulator',
+        previewImage: 'assets/images/projects/forklift_vr_preview.png',
         previewMedia: [
           ProjectMedia(
-            // TODO: Add assetOrUrl (e.g. 'assets/images/projects/forklift_cabin.gif') when available
-            label: 'VR In-Cabin Controls',
-            hint: 'Screenshot / GIF coming soon',
+            assetOrUrl: 'assets/images/projects/forklift_vr_preview.png',
+            label: 'VR Main Menu',
           ),
           ProjectMedia(
-            // TODO: Add assetOrUrl (e.g. 'assets/images/projects/forklift_driving.gif') when available
-            label: 'Warehouse Driving Course',
-            hint: 'Screenshot / GIF coming soon',
+            assetOrUrl: 'assets/images/projects/forklift_main_menu.gif',
+            label: 'VR Module Selection',
           ),
           ProjectMedia(
-            // TODO: Add assetOrUrl (e.g. 'assets/images/projects/forklift_pallets.gif') when available
+            assetOrUrl:
+                'assets/images/projects/forklift_exterior_inspection.gif',
+            label: 'Exterior Pre-Operation Inspection',
+          ),
+          ProjectMedia(
+            assetOrUrl:
+                'assets/images/projects/forklift_interior_inspection.gif',
+            label: 'In-Cabin Controls Inspection',
+          ),
+          ProjectMedia(
+            assetOrUrl:
+                'assets/images/projects/forklift_inspection_evaluation.png',
+            label: 'Inspection Evaluation',
+          ),
+          ProjectMedia(
+            assetOrUrl: 'assets/images/projects/forklift_driving.gif',
+            label: 'Warehouse Driving & Parking',
+          ),
+          ProjectMedia(
+            assetOrUrl: 'assets/images/projects/forklift_load_handling.gif',
             label: 'Load & Pallet Handling',
-            hint: 'Screenshot / GIF coming soon',
+          ),
+          ProjectMedia(
+            assetOrUrl: 'assets/images/projects/forklift_session_results.png',
+            label: 'Session Summary & Scoring',
           ),
         ],
         caseStudy: ProjectCaseStudy(
