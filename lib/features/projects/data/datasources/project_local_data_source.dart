@@ -25,16 +25,46 @@ class ProjectLocalDataSourceImpl implements ProjectLocalDataSource {
             'CoDi',
           ],
           githubUrl: 'https://github.com/JoshuaLopez2000/vaquita-mx',
+          previewImage: 'assets/images/projects/vaquita_mx_preview.png',
           previewMedia: [
             ProjectMedia(
-              // TODO: Reemplazar con captura/GIF de la app Flutter cuando esté lista
-              label: 'Cliente Flutter (Android & Web)',
-              hint: 'Captura / GIF próximamente',
+              assetOrUrl: 'assets/images/projects/vaquita_mx_preview.png',
+              label: 'Resumen general y grupos activos',
             ),
             ProjectMedia(
-              // TODO: Reemplazar con captura de arquitectura API Go + PostgreSQL + Docker
-              label: 'API Go · PostgreSQL · Docker',
-              hint: 'Captura / GIF próximamente',
+              assetOrUrl: 'assets/images/projects/vaquita_mx_group_detail.png',
+              label: 'Detalle de grupo y división por salario',
+            ),
+            ProjectMedia(
+              assetOrUrl:
+                  'assets/images/projects/vaquita_mx_payment_request.png',
+              label: 'Solicitud de cobro QR y liquidación',
+            ),
+            ProjectMedia(
+              assetOrUrl:
+                  'assets/images/projects/vaquita_mx_financial_stats.png',
+              label: 'Estadísticas financieras del grupo',
+            ),
+            ProjectMedia(
+              assetOrUrl: 'assets/images/projects/vaquita_mx_inbox.png',
+              label: 'Bandeja de invitaciones y saldos',
+            ),
+            ProjectMedia(
+              assetOrUrl:
+                  'assets/images/projects/vaquita_mx_contact_balance.png',
+              label: 'Desglose de saldo por contacto',
+            ),
+            ProjectMedia(
+              assetOrUrl: 'assets/images/projects/vaquita_mx_activity.png',
+              label: 'Historial de movimientos y liquidaciones',
+            ),
+            ProjectMedia(
+              assetOrUrl: 'assets/images/projects/vaquita_mx_contacts.png',
+              label: 'Directorio de contactos',
+            ),
+            ProjectMedia(
+              assetOrUrl: 'assets/images/projects/vaquita_mx_profile.png',
+              label: 'Perfil y sincronización de cuenta',
             ),
           ],
           caseStudy: ProjectCaseStudy(
@@ -267,16 +297,43 @@ class ProjectLocalDataSourceImpl implements ProjectLocalDataSource {
             'Group expense application for Mexico with a cross-platform Flutter client (Android/Web), dependency-free Go REST API, versioned PostgreSQL migrations, rotating session tokens, and a replaceable CoDi adapter.',
         tags: ['Flutter', 'Go', 'PostgreSQL', 'REST API', 'Docker', 'CoDi'],
         githubUrl: 'https://github.com/JoshuaLopez2000/vaquita-mx',
+        previewImage: 'assets/images/projects/vaquita_mx_preview.png',
         previewMedia: [
           ProjectMedia(
-            // TODO: Replace with Flutter app capture/GIF when ready
-            label: 'Flutter Client (Android & Web)',
-            hint: 'Screenshot / GIF coming soon',
+            assetOrUrl: 'assets/images/projects/vaquita_mx_preview.png',
+            label: 'Home Dashboard & Active Groups',
           ),
           ProjectMedia(
-            // TODO: Replace with Go API + PostgreSQL + Docker architecture visual
-            label: 'Go API · PostgreSQL · Docker',
-            hint: 'Screenshot / GIF coming soon',
+            assetOrUrl: 'assets/images/projects/vaquita_mx_group_detail.png',
+            label: 'Group Detail & Salary-Proportional Splits',
+          ),
+          ProjectMedia(
+            assetOrUrl: 'assets/images/projects/vaquita_mx_payment_request.png',
+            label: 'QR Payment Request & Settlement',
+          ),
+          ProjectMedia(
+            assetOrUrl: 'assets/images/projects/vaquita_mx_financial_stats.png',
+            label: 'Group Financial Statistics',
+          ),
+          ProjectMedia(
+            assetOrUrl: 'assets/images/projects/vaquita_mx_inbox.png',
+            label: 'Invitations Inbox & Contact Balances',
+          ),
+          ProjectMedia(
+            assetOrUrl: 'assets/images/projects/vaquita_mx_contact_balance.png',
+            label: 'Per-Contact Balance Breakdown',
+          ),
+          ProjectMedia(
+            assetOrUrl: 'assets/images/projects/vaquita_mx_activity.png',
+            label: 'Activity Feed, Reversals & Settlements',
+          ),
+          ProjectMedia(
+            assetOrUrl: 'assets/images/projects/vaquita_mx_contacts.png',
+            label: 'Contacts Directory',
+          ),
+          ProjectMedia(
+            assetOrUrl: 'assets/images/projects/vaquita_mx_profile.png',
+            label: 'Account Profile & Cloud Sync',
           ),
         ],
         caseStudy: ProjectCaseStudy(
